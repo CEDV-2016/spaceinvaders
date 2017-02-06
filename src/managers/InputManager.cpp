@@ -1,4 +1,4 @@
-#include "InputManager.hpp"
+#include "InputManager.h"
 
 template<> InputManager* Ogre::Singleton<InputManager>::msSingleton = 0;
 
@@ -39,7 +39,7 @@ InputManager::initialise
 {
   if(!_inputSystem) {
     // Setup basic variables
-    OIS::ParamList paramList;
+    OIS::ParamList paramList;    
     size_t windowHnd = 0;
     std::ostringstream windowHndStr;
 
@@ -48,18 +48,6 @@ InputManager::initialise
     windowHndStr << windowHnd;
     paramList.insert(std::make_pair(std::string( "WINDOW"),
 				    windowHndStr.str()));
-    paramList.insert(std::make_pair("x11_mouse_hide", std::string("true")));
-
-#if defined OIS_WIN32_PLATFORM
-    paramList.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
-    paramList.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
-    paramList.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
-    paramList.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
-#elif defined OIS_LINUX_PLATFORM
-    paramList.insert(std::make_pair(std::string("x11_mouse_grab"), std::string("false")));
-    paramList.insert(std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
-    paramList.insert(std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
-#endif
 
     // Create inputsystem
     _inputSystem = OIS::InputManager::
@@ -71,8 +59,6 @@ InputManager::initialise
 
     _mouse = static_cast<OIS::Mouse*>
       (_inputSystem->createInputObject(OIS::OISMouse, true));
-    _mouse->getMouseState().width = renderWindow->getWidth();
-    _mouse->getMouseState().height = renderWindow->getHeight();
     _mouse->setEventCallback(this);
 
     // Get window size
@@ -91,7 +77,7 @@ InputManager::capture ()
   // Capturar y actualizar cada frame.
   if (_mouse)
     _mouse->capture();
-
+  
   if (_keyboard)
     _keyboard->capture();
 }
@@ -143,7 +129,7 @@ InputManager::removeKeyListener
 }
 
 void
-InputManager::removeMouseListener
+InputManager::removeMouseListener 
 (const std::string& instanceName)
 {
   // Comprobar si el listener existe.
@@ -205,7 +191,7 @@ InputManager::removeAllMouseListeners ()
 }
 
 void
-InputManager::setWindowExtents
+InputManager::setWindowExtents 
 (int width, int height)
 {
   // Establecer la región del ratón.
@@ -228,11 +214,9 @@ InputManager::getMouse ()
 }
 
 bool
-InputManager::keyPressed
+InputManager::keyPressed 
 (const OIS::KeyEvent &e)
 {
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(static_cast<CEGUI::Key::Scan>(e.key));
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectChar(e.text);
   itKeyListener = _keyListeners.begin();
   itKeyListenerEnd = _keyListeners.end();
   // Delega en los KeyListener añadidos.
@@ -247,7 +231,6 @@ bool
 InputManager::keyReleased
 (const OIS::KeyEvent &e)
 {
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(static_cast<CEGUI::Key::Scan>(e.key));
   itKeyListener = _keyListeners.begin();
   itKeyListenerEnd = _keyListeners.end();
   // Delega en los KeyListener añadidos.
@@ -262,7 +245,6 @@ bool
 InputManager::mouseMoved
 (const OIS::MouseEvent &e)
 {
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(e.state.X.rel, e.state.Y.rel);
   itMouseListener = _mouseListeners.begin();
   itMouseListenerEnd = _mouseListeners.end();
  // Delega en los MouseListener añadidos.
@@ -277,7 +259,6 @@ bool
 InputManager::mousePressed
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(convertMouseButton(id));
   itMouseListener = _mouseListeners.begin();
   itMouseListenerEnd = _mouseListeners.end();
   // Delega en los MouseListener añadidos.
@@ -292,7 +273,6 @@ bool
 InputManager::mouseReleased
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(convertMouseButton(id));
   itMouseListener = _mouseListeners.begin();
   itMouseListenerEnd = _mouseListeners.end();
   // Delega en los MouseListener añadidos.
@@ -303,26 +283,6 @@ InputManager::mouseReleased
   return true;
 }
 
-CEGUI::MouseButton InputManager::convertMouseButton(OIS::MouseButtonID id)
-{
-  CEGUI::MouseButton ceguiId;
-  switch(id)
-    {
-    case OIS::MB_Left:
-      ceguiId = CEGUI::LeftButton;
-      break;
-    case OIS::MB_Right:
-      ceguiId = CEGUI::RightButton;
-      break;
-    case OIS::MB_Middle:
-      ceguiId = CEGUI::MiddleButton;
-      break;
-    default:
-      ceguiId = CEGUI::LeftButton;
-    }
-  return ceguiId;
-}
-
 InputManager*
 InputManager::getSingletonPtr ()
 {
@@ -331,7 +291,7 @@ InputManager::getSingletonPtr ()
 
 InputManager&
 InputManager::getSingleton ()
-{
+{  
   assert(msSingleton);
   return *msSingleton;
 }

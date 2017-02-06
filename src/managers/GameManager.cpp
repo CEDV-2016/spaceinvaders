@@ -1,7 +1,7 @@
 #include <Ogre.h>
 
-#include "GameManager.hpp"
-#include "GameState.hpp"
+#include "GameManager.h"
+#include "GameState.h"
 
 template<> GameManager* Ogre::Singleton<GameManager>::msSingleton = 0;
 
@@ -16,12 +16,9 @@ GameManager::~GameManager ()
     _states.top()->exit();
     _states.pop();
   }
-
+  
   if (_root)
     delete _root;
-
-  OGRE_DELETE _trackManager;
-  OGRE_DELETE _pSoundFXManager;
 }
 
 void
@@ -30,19 +27,14 @@ GameManager::start
 {
   // Creación del objeto Ogre::Root.
   _root = new Ogre::Root();
-  _trackManager = OGRE_NEW TrackManager;
-  _pSoundFXManager = OGRE_NEW SoundFXManager;
-
-  //loadResources();
-  initSDL();
+  
+  loadResources();
 
   if (!configure())
-    return;
-
+    return;    
+  	
   _inputMgr = new InputManager;
   _inputMgr->initialise(_renderWindow);
-  _mainTrack = _trackManager->load("mousetrap.ogg");
-  _mainTrack->play();
 
   // Registro como key y mouse listener...
   _inputMgr->addKeyListener(this, "GameManager");
@@ -50,28 +42,6 @@ GameManager::start
 
   // El GameManager es un FrameListener.
   _root->addFrameListener(this);
-
-  //CEGUI
-  /*CEGUI::OgreRenderer::bootstrapSystem();
-  CEGUI::Scheme::setDefaultResourceGroup("Schemes");
-  CEGUI::ImageManager::setImagesetDefaultResourceGroup("Imagesets");
-  CEGUI::Font::setDefaultResourceGroup("Fonts");
-  CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
-  CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
-
-  CEGUI::SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("Vanilla-Images/MouseArrow");
-
-  // Let's make the OS and the CEGUI cursor be in the same place
-  CEGUI::Vector2f mousePos = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
-  CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(-mousePos.d_x,-mousePos.d_y);
-
-  CEGUI::FontManager::getSingleton().createAll("*.font", "Fonts");
-
-  //Sheet
-  CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
-  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(sheet);*/
-
 
   // Transición al estado inicial.
   changeState(state);
@@ -105,7 +75,7 @@ GameManager::pushState
   // Pausa del estado actual.
   if (!_states.empty())
     _states.top()->pause();
-
+  
   // Transición al nuevo estado.
   _states.push(state);
   // enter() sobre el nuevo estado.
@@ -120,26 +90,10 @@ GameManager::popState ()
     _states.top()->exit();
     _states.pop();
   }
-
+  
   // Vuelta al estado anterior.
   if (!_states.empty())
     _states.top()->resume();
-}
-
-void
-GameManager::restart
-(GameState* state)
-{
-  // Limpieza de la pila
-  while (!_states.empty()) {
-    _states.top()->exit();
-    _states.pop();
-  }
-
-  // Transición al nuevo estado.
-  _states.push(state);
-  // enter() sobre el nuevo estado.
-  _states.top()->enter();
 }
 
 void
@@ -147,7 +101,7 @@ GameManager::loadResources ()
 {
   Ogre::ConfigFile cf;
   cf.load("resources.cfg");
-
+  
   Ogre::ConfigFile::SectionIterator sI = cf.getSectionIterator();
   Ogre::String sectionstr, typestr, datastr;
   while (sI.hasMoreElements()) {
@@ -155,9 +109,9 @@ GameManager::loadResources ()
     Ogre::ConfigFile::SettingsMultiMap *settings = sI.getNext();
     Ogre::ConfigFile::SettingsMultiMap::iterator i;
     for (i = settings->begin(); i != settings->end(); ++i) {
-      typestr = i->first;
-      datastr = i->second;
-      Ogre::ResourceGroupManager::getSingleton().addResourceLocation(datastr, typestr, sectionstr);
+      typestr = i->first;    datastr = i->second;
+      Ogre::ResourceGroupManager::getSingleton().addResourceLocation
+            (datastr, typestr, sectionstr);	
     }
   }
 }
@@ -170,11 +124,11 @@ GameManager::configure ()
       return false;
     }
   }
-
+  
   _renderWindow = _root->initialise(true, "SpaceInvaders");
-
+  
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-
+  
   return true;
 }
 
@@ -186,14 +140,9 @@ GameManager::getSingletonPtr ()
 
 GameManager&
 GameManager::getSingleton ()
-{
+{  
   assert(msSingleton);
   return *msSingleton;
-}
-
-Ogre::RenderWindow*
-GameManager::getRenderWindow(){
-  return _renderWindow;
 }
 
 // Las siguientes funciones miembro delegan
@@ -214,7 +163,7 @@ GameManager::frameEnded
 }
 
 bool
-GameManager::keyPressed
+GameManager::keyPressed 
 (const OIS::KeyEvent &e)
 {
   _states.top()->keyPressed(e);
@@ -230,7 +179,7 @@ GameManager::keyReleased
 }
 
 bool
-GameManager::mouseMoved
+GameManager::mouseMoved 
 (const OIS::MouseEvent &e)
 {
   _states.top()->mouseMoved(e);
@@ -238,7 +187,7 @@ GameManager::mouseMoved
 }
 
 bool
-GameManager::mousePressed
+GameManager::mousePressed 
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   _states.top()->mousePressed(e, id);
@@ -250,23 +199,5 @@ GameManager::mouseReleased
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   _states.top()->mouseReleased(e, id);
-  return true;
-}
-
-bool GameManager::initSDL () {
-  if (SDL_Init(SDL_INIT_AUDIO) < 0) {
-    return false;
-  }
-  // Llamar a  SDL_Quit al terminar.
-  atexit(SDL_Quit);
-
-  // Inicializando SDL mixer...
-  if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS, 4096) < 0) {
-    return false;
-  }
-
-  // Llamar a Mix_CloseAudio al terminar.
-  atexit(Mix_CloseAudio);
-
   return true;
 }

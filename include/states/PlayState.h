@@ -1,20 +1,15 @@
-#pragma once
+#ifndef PlayState_H
+#define PlayState_H
 
 #include <Ogre.h>
 #include <OIS/OIS.h>
-#include <CEGUI.h>
-#include <RendererModules/Ogre/Renderer.h>
-#include <iostream>
-#include <string>
 
-#include "Game.hpp"
-#include "GameState.hpp"
-#include "RankingManager.hpp"
+#include "GameState.h"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
-public:
-  PlayState ();
+ public:
+  PlayState () {}
 
   void enter ();
   void exit ();
@@ -35,21 +30,13 @@ public:
   static PlayState& getSingleton ();
   static PlayState* getSingletonPtr ();
 
-  void createScene();
-  void createGUI();
-
-protected:
-  CEGUI::OgreRenderer* renderer;
-  CEGUI::Window* _gameGUI, *_nameView, *_pointsView;
+ protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;
   Ogre::Viewport* _viewport;
   Ogre::Camera* _camera;
-  Ogre::RaySceneQuery *_raySceneQuery;
-  Ogre::SceneNode *_selectedNode;
-  Game * _game;
-  RankingManager* _rankingManager;
 
-  bool _exitGame, _left_click;
-  int _mouse_x, _mouse_y;
+  bool _exitGame;
 };
+
+#endif

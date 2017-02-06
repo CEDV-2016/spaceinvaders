@@ -1,17 +1,16 @@
-#pragma once
+#ifndef PauseState_H
+#define PauseState_H
 
 #include <Ogre.h>
 #include <OIS/OIS.h>
-#include <CEGUI.h>
-#include <RendererModules/Ogre/Renderer.h>
 
-#include "GameState.hpp"
+#include "GameState.h"
 
-class CreditsState : public Ogre::Singleton<CreditsState>, public GameState
+class PauseState : public Ogre::Singleton<PauseState>, public GameState
 {
-public:
-  CreditsState();
-  
+ public:
+  PauseState() {}
+
   void enter ();
   void exit ();
   void pause ();
@@ -28,23 +27,16 @@ public:
   bool frameEnded (const Ogre::FrameEvent& evt);
 
   // Heredados de Ogre::Singleton.
-  static CreditsState& getSingleton ();
-  static CreditsState* getSingletonPtr ();
+  static PauseState& getSingleton ();
+  static PauseState* getSingletonPtr ();
 
-  void createGUI();
-
-protected:
+ protected:
   Ogre::Root* _root;
+  Ogre::SceneManager* _sceneMgr;
   Ogre::Viewport* _viewport;
   Ogre::Camera* _camera;
-  Ogre::SceneManager* _sceneMgr;
-  Ogre::RaySceneQuery *_raySceneQuery;
-  Ogre::SceneNode *_selectedNode;
-  CEGUI::OgreRenderer* renderer;
-  OIS::InputManager* _inputManager;
-  OIS::Keyboard* _keyboard;
-  OIS::Mouse* _mouse;
-  CEGUI::Window* _credits;
 
   bool _exitGame;
 };
+
+#endif

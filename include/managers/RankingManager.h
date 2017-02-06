@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RankingManager_H
+#define RankingManager_H
 
 #include <iostream>
 #include <fstream>
@@ -7,15 +8,16 @@
 
 class RankingManager
 {
-public:
+ public:
   RankingManager () {};
   ~RankingManager () {};
   std::vector<std::string> getRanking ();
   bool checkRanking (int turns);
   void setRanking (std::string, int turns);
 
-private:
+ private:
   std::vector<std::string> _rankings;
   void saveRankings ();
   void loadRankings ();
 };
+#endif

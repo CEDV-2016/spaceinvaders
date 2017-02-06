@@ -1,18 +1,25 @@
-#include "IntroState.hpp"
-#include "PauseState.hpp"
+#include "PauseState.h"
 
 template<> PauseState* Ogre::Singleton<PauseState>::msSingleton = 0;
 
 void
 PauseState::enter ()
 {
+  _root = Ogre::Root::getSingletonPtr();
 
+  // Se recupera el gestor de escena y la cámara.
+  _sceneMgr = _root->getSceneManager("SceneManager");
+  _camera = _sceneMgr->getCamera("IntroCamera");
+  _viewport = _root->getAutoCreatedWindow()->getViewport(0);
+  // Nuevo background colour.
+  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 1.0, 0.0));
+
+  _exitGame = false;
 }
 
 void
 PauseState::exit ()
 {
-  _pause->hide();
 }
 
 void
@@ -38,21 +45,19 @@ PauseState::frameEnded
 {
   if (_exitGame)
     return false;
-
+  
   return true;
 }
 
 void
 PauseState::keyPressed
-(const OIS::KeyEvent &e)
-{
+(const OIS::KeyEvent &e) {
 }
 
 void
 PauseState::keyReleased
 (const OIS::KeyEvent &e)
 {
-  if (e.key == OIS::KC_P) popState();
 }
 
 void
@@ -81,12 +86,7 @@ return msSingleton;
 
 PauseState&
 PauseState::getSingleton ()
-{
+{ 
   assert(msSingleton);
   return *msSingleton;
-}
-
-void PauseState::createGUI()
-{
-
 }

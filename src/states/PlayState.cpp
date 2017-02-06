@@ -1,38 +1,40 @@
-#include "PlayState.hpp"
-#include "PauseState.hpp"
-#include "GameManager.hpp"
-#include "GameOverState.hpp"
-#include "SoundFX.hpp"
-#include "SoundFXManager.hpp"
+#include "PlayState.h"
+#include "PauseState.h"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
-
-PlayState::PlayState() {
-  _game = new Game();
-}
 
 void
 PlayState::enter ()
 {
+  _root = Ogre::Root::getSingletonPtr();
 
+  // Se recupera el gestor de escena y la cámara.
+  _sceneMgr = _root->getSceneManager("SceneManager");
+  _camera = _sceneMgr->getCamera("IntroCamera");
+  _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
+  // Nuevo background colour.
+  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 1.0));
+
+  _exitGame = false;
 }
 
 void
 PlayState::exit ()
 {
-
+  _sceneMgr->clearScene();
+  _root->getAutoCreatedWindow()->removeAllViewports();
 }
 
 void
 PlayState::pause()
 {
-  _gameGUI->hide();
 }
 
 void
 PlayState::resume()
 {
-  _gameGUI->show();
+  // Se restaura el background colour.
+  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 1.0));
 }
 
 bool
@@ -46,7 +48,10 @@ bool
 PlayState::frameEnded
 (const Ogre::FrameEvent& evt)
 {
-  return !_exitGame;
+  if (_exitGame)
+    return false;
+  
+  return true;
 }
 
 void
@@ -59,22 +64,21 @@ void
 PlayState::keyReleased
 (const OIS::KeyEvent &e)
 {
-
+  if (e.key == OIS::KC_ESCAPE) {
+    _exitGame = true;
+  }
 }
 
 void
 PlayState::mouseMoved
 (const OIS::MouseEvent &e)
 {
-  _mouse_x = e.state.X.abs;
-  _mouse_y = e.state.Y.abs;
 }
 
 void
 PlayState::mousePressed
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
-  _left_click = true;
 }
 
 void
@@ -86,21 +90,12 @@ PlayState::mouseReleased
 PlayState*
 PlayState::getSingletonPtr ()
 {
-  return msSingleton;
+return msSingleton;
 }
 
 PlayState&
 PlayState::getSingleton ()
-{
+{ 
   assert(msSingleton);
   return *msSingleton;
-}
-
-void PlayState::createScene() {
-
-}
-
-void PlayState::createGUI()
-{
-
 }

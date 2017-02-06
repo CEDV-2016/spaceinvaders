@@ -1,40 +1,42 @@
-#include "IntroState.hpp"
-#include "NewGameState.hpp"
-#include "PlayState.hpp"
-#include "CreditsState.hpp"
-#include "RankingState.hpp"
+#include "IntroState.h"
+#include "PlayState.h"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 
 void
 IntroState::enter ()
 {
+  _root = Ogre::Root::getSingletonPtr();
 
+  _sceneMgr = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
+  _camera = _sceneMgr->createCamera("IntroCamera");
+  _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
+  _viewport->setBackgroundColour(Ogre::ColourValue(1.0, 1.0, 1.0));
+
+  _exitGame = false;
 }
 
 void
 IntroState::exit()
 {
-
+  _sceneMgr->clearScene();
+  _root->getAutoCreatedWindow()->removeAllViewports();
 }
 
 void
 IntroState::pause ()
 {
-  _intro->hide();
 }
 
 void
 IntroState::resume ()
 {
-  _intro->show();
 }
 
 bool
 IntroState::frameStarted
-(const Ogre::FrameEvent& evt)
+(const Ogre::FrameEvent& evt) 
 {
-  if(_exitGame) return false;
   return true;
 }
 
@@ -44,7 +46,7 @@ IntroState::frameEnded
 {
   if (_exitGame)
     return false;
-
+  
   return true;
 }
 
@@ -58,7 +60,9 @@ void
 IntroState::keyReleased
 (const OIS::KeyEvent &e )
 {
-
+  if (e.key == OIS::KC_ESCAPE) {
+    _exitGame = true;
+  }
 }
 
 void
@@ -82,21 +86,12 @@ IntroState::mouseReleased
 IntroState*
 IntroState::getSingletonPtr ()
 {
-  return msSingleton;
+return msSingleton;
 }
 
 IntroState&
 IntroState::getSingleton ()
-{
+{ 
   assert(msSingleton);
   return *msSingleton;
-}
-
-void IntroState::createScene() {
-
-}
-
-void IntroState::createGUI()
-{
-
 }
