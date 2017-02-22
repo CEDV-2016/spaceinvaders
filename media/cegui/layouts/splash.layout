@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="SplashWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Vanilla/Label" name="SpaceText" >
+            <Property name="Area" value="{{0,0},{0,-182},{0,630},{0,10}}" />
+            <Property name="Font" value="Jura-150" />
+            <Property name="Text" value="Space" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Label" name="InvadersText" >
+            <Property name="Area" value="{{0,12},{0,-21},{0,922},{0,235}}" />
+            <Property name="Font" value="Jura-150" />
+            <Property name="Text" value="Invaders" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Label" name="ContinueText" >
+            <Property name="Area" value="{{0,-11},{0,-58},{0,1037},{0,18}}" />
+            <Property name="Font" value="Jura-25" />
+            <Property name="Text" value="Pulsa &quot;espacio&quot; para continuar" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Bottom" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+    </Window>
+</GUILayout>

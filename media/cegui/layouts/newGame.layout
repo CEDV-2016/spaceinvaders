@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="NewGameWIndow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="Font" value="Jura-25" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Vanilla/Label" name="Name" >
+            <Property name="Area" value="{{0,180},{0,114},{0,482},{0,218}}" />
+            <Property name="Font" value="Jura-50" />
+            <Property name="Text" value="Nombre:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="Vanilla/Editbox" name="NameEditBox" >
+            <Property name="Area" value="{{-0.00078125,484},{0,114},{0.316406,740},{0,218}}" />
+            <Property name="Font" value="Jura-50" />
+        </Window>
+        <Window type="Vanilla/Label" name="Choose" >
+            <Property name="Area" value="{{0.142187,0},{0.333333,0},{0.357812,128},{0.333333,104}}" />
+            <Property name="Font" value="Jura-50" />
+            <Property name="Text" value="Elegir nave:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+    </Window>
+</GUILayout>

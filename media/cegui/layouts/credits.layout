@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Vanilla/Label" name="Create" >
+            <Property name="Area" value="{{0,0},{0.352778,0},{0.0929687,128},{0.352778,54}}" />
+            <Property name="Font" value="Jura-25" />
+            <Property name="Text" value="Creado por:" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Label" name="Pedro" >
+            <Property name="Area" value="{{0.00546875,0},{0,0},{0.847656,128},{0,104}}" />
+            <Property name="Font" value="Jura-25" />
+            <Property name="Text" value="Pedro Manuel Gómez-Portillo López" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Label" name="JJ" >
+            <Property name="Area" value="{{0,0},{0.569444,0},{0.628125,128},{0.569444,54}}" />
+            <Property name="Font" value="Jura-25" />
+            <Property name="Text" value="José Juan Ramirez de Arellano Díaz Miguel" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+    </Window>
+</GUILayout>
