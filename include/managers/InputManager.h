@@ -3,13 +3,14 @@
 
 #include <Ogre.h>
 #include <OIS/OIS.h>
+#include <CEGUI.h>
 
 // Gestor para los eventos de entrada (teclado y ratón).
 class InputManager : public Ogre::Singleton<InputManager>, public OIS::KeyListener, public OIS::MouseListener {
  public:
   InputManager ();
   virtual ~InputManager ();
-  
+
   void initialise (Ogre::RenderWindow *renderWindow);
   void capture ();
 
@@ -23,15 +24,17 @@ class InputManager : public Ogre::Singleton<InputManager>, public OIS::KeyListen
   void removeMouseListener (const std::string& instanceName);
   void removeKeyListener (OIS::KeyListener *keyListener);
   void removeMouseListener (OIS::MouseListener *mouseListener);
-  
+
   void removeAllListeners ();
   void removeAllKeyListeners ();
   void removeAllMouseListeners ();
-  
+
   void setWindowExtents (int width, int height);
 
   OIS::Keyboard* getKeyboard ();
   OIS::Mouse* getMouse ();
+
+  CEGUI::MouseButton convertMouseButton(OIS::MouseButtonID id);
 
   // Heredados de Ogre::Singleton.
   static InputManager& getSingleton ();
@@ -40,13 +43,13 @@ class InputManager : public Ogre::Singleton<InputManager>, public OIS::KeyListen
  private:
   bool keyPressed (const OIS::KeyEvent &e);
   bool keyReleased (const OIS::KeyEvent &e);
-  
+
   bool mouseMoved (const OIS::MouseEvent &e);
-  bool mousePressed (const OIS::MouseEvent &e, 
+  bool mousePressed (const OIS::MouseEvent &e,
 		     OIS::MouseButtonID id);
   bool mouseReleased (const OIS::MouseEvent &e,
 		      OIS::MouseButtonID id);
-  
+
   OIS::InputManager *_inputSystem;
   OIS::Keyboard *_keyboard;
   OIS::Mouse *_mouse;

@@ -280,7 +280,7 @@
         <StateImagery name="Normal">
             <Layer>
                 <Section section="Frame" look="Vanilla/Shared" controlProperty="UseStandardImagery">
-                    <Colours topLeft="FF7F7F7F" bottomLeft="FF7F7F7F" topRight="FF7F7F7F" bottomRight="FF7F7F7F"/>
+                    <Colours topLeft="007F7F7F" bottomLeft="007F7F7F" topRight="007F7F7F" bottomRight="007F7F7F"/>
                 </Section>
                 <Section section="normal_image"/>
                 <Section section="label">
@@ -291,7 +291,7 @@
         <StateImagery name="Hover">
             <Layer>
                 <Section section="Frame" look="Vanilla/Shared" controlProperty="UseStandardImagery">
-                    <Colours topLeft="FF9F9F9F" bottomLeft="FF9F9F9F" topRight="FF9F9F9F" bottomRight="FF9F9F9F"/>
+                    <Colours topLeft="009F9F9F" bottomLeft="009F9F9F" topRight="009F9F9F" bottomRight="009F9F9F"/>
                 </Section>
                 <Section section="hover_image"/>
                 <Section section="label">
@@ -302,7 +302,7 @@
         <StateImagery name="Pushed">
             <Layer>
                 <Section section="Frame" look="Vanilla/Shared" controlProperty="UseStandardImagery">
-                    <Colours topLeft="FF6F6F6F" bottomLeft="FF6F6F6F" topRight="FF6F6F6F" bottomRight="FF6F6F6F"/>
+                    <Colours topLeft="006F6F6F" bottomLeft="006F6F6F" topRight="006F6F6F" bottomRight="006F6F6F"/>
                 </Section>
                 <Section section="pushed_image"/>
                 <Section section="label">
@@ -313,10 +313,10 @@
         <StateImagery name="Disabled">
             <Layer>
                 <Section section="Frame" look="Vanilla/Shared" controlProperty="UseStandardImagery">
-                    <Colours topLeft="FF3F3F3F" bottomLeft="FF3F3F3F" topRight="FF3F3F3F" bottomRight="FF3F3F3F"/>
+                    <Colours topLeft="003F3F3F" bottomLeft="003F3F3F" topRight="003F3F3F" bottomRight="003F3F3F"/>
                 </Section>
                 <Section section="normal_image">
-                    <Colours topLeft="FF3F3F3F" bottomLeft="FF3F3F3F" topRight="FF3F3F3F" bottomRight="FF3F3F3F"/>
+                    <Colours topLeft="003F3F3F" bottomLeft="003F3F3F" topRight="003F3F3F" bottomRight="003F3F3F"/>
                 </Section>
                 <Section section="label">
                     <ColourProperty name="DisabledTextColour"/>

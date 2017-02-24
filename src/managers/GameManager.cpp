@@ -16,7 +16,7 @@ GameManager::~GameManager ()
     _states.top()->exit();
     _states.pop();
   }
-  
+
   if (_root)
     delete _root;
 }
@@ -27,12 +27,12 @@ GameManager::start
 {
   // Creación del objeto Ogre::Root.
   _root = new Ogre::Root();
-  
+
   loadResources();
 
   if (!configure())
-    return;    
-  	
+    return;
+
   _inputMgr = new InputManager;
   _inputMgr->initialise(_renderWindow);
 
@@ -42,6 +42,27 @@ GameManager::start
 
   // El GameManager es un FrameListener.
   _root->addFrameListener(this);
+
+  //CEGUI
+  CEGUI::OgreRenderer::bootstrapSystem();
+  CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+  CEGUI::ImageManager::setImagesetDefaultResourceGroup("Imagesets");
+  CEGUI::Font::setDefaultResourceGroup("Fonts");
+  CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+  CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+
+  CEGUI::SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("Vanilla-Images/MouseArrow");
+
+  // Let's make the OS and the CEGUI cursor be in the same place
+  CEGUI::Vector2f mousePos = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+  CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(-mousePos.d_x,-mousePos.d_y);
+
+  CEGUI::FontManager::getSingleton().createAll("*.font", "Fonts");
+
+  //Sheet
+  CEGUI::Window* sheet = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow","Sheet");
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(sheet);
 
   // Transición al estado inicial.
   changeState(state);
@@ -75,7 +96,7 @@ GameManager::pushState
   // Pausa del estado actual.
   if (!_states.empty())
     _states.top()->pause();
-  
+
   // Transición al nuevo estado.
   _states.push(state);
   // enter() sobre el nuevo estado.
@@ -90,7 +111,7 @@ GameManager::popState ()
     _states.top()->exit();
     _states.pop();
   }
-  
+
   // Vuelta al estado anterior.
   if (!_states.empty())
     _states.top()->resume();
@@ -101,7 +122,7 @@ GameManager::loadResources ()
 {
   Ogre::ConfigFile cf;
   cf.load("resources.cfg");
-  
+
   Ogre::ConfigFile::SectionIterator sI = cf.getSectionIterator();
   Ogre::String sectionstr, typestr, datastr;
   while (sI.hasMoreElements()) {
@@ -111,7 +132,7 @@ GameManager::loadResources ()
     for (i = settings->begin(); i != settings->end(); ++i) {
       typestr = i->first;    datastr = i->second;
       Ogre::ResourceGroupManager::getSingleton().addResourceLocation
-            (datastr, typestr, sectionstr);	
+            (datastr, typestr, sectionstr);
     }
   }
 }
@@ -124,11 +145,11 @@ GameManager::configure ()
       return false;
     }
   }
-  
+
   _renderWindow = _root->initialise(true, "SpaceInvaders");
-  
+
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-  
+
   return true;
 }
 
@@ -140,7 +161,7 @@ GameManager::getSingletonPtr ()
 
 GameManager&
 GameManager::getSingleton ()
-{  
+{
   assert(msSingleton);
   return *msSingleton;
 }
@@ -163,7 +184,7 @@ GameManager::frameEnded
 }
 
 bool
-GameManager::keyPressed 
+GameManager::keyPressed
 (const OIS::KeyEvent &e)
 {
   _states.top()->keyPressed(e);
@@ -179,7 +200,7 @@ GameManager::keyReleased
 }
 
 bool
-GameManager::mouseMoved 
+GameManager::mouseMoved
 (const OIS::MouseEvent &e)
 {
   _states.top()->mouseMoved(e);
@@ -187,7 +208,7 @@ GameManager::mouseMoved
 }
 
 bool
-GameManager::mousePressed 
+GameManager::mousePressed
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   _states.top()->mousePressed(e, id);

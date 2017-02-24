@@ -2,7 +2,12 @@
 #define IntroState_H
 
 #include <Ogre.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayElement.h>
+#include <OgreOverlayManager.h>
 #include <OIS/OIS.h>
+#include <CEGUI.h>
+#include <RendererModules/Ogre/Renderer.h>
 
 #include "GameState.h"
 
@@ -30,11 +35,21 @@ class IntroState : public Ogre::Singleton<IntroState>, public GameState
   static IntroState& getSingleton ();
   static IntroState* getSingletonPtr ();
 
+  void createScene();
+  void createGUI();
+
  protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;
   Ogre::Viewport* _viewport;
   Ogre::Camera* _camera;
+  Ogre::RaySceneQuery *_raySceneQuery;
+  Ogre::SceneNode *_selectedNode;
+  CEGUI::OgreRenderer* renderer;
+  OIS::InputManager* _inputManager;
+  OIS::Keyboard* _keyboard;
+  OIS::Mouse* _mouse;
+  CEGUI::Window* _intro;
 
   bool _exitGame;
 };

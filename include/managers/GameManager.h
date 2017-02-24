@@ -5,6 +5,10 @@
 #include <Ogre.h>
 #include <OgreSingleton.h>
 #include <OIS/OIS.h>
+#include <CEGUI.h>
+#include <RendererModules/Ogre/Renderer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "InputManager.h"
 
@@ -18,12 +22,12 @@ class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManag
 
   // Para el estado inicial.
   void start (GameState* state);
-  
+
   // Funcionalidad para transiciones de estados.
   void changeState (GameState* state);
   void pushState (GameState* state);
   void popState ();
-  
+
   // Heredados de Ogre::Singleton.
   static GameManager& getSingleton ();
   static GameManager* getSingletonPtr ();
@@ -36,7 +40,7 @@ class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManag
   // Funciones de configuración.
   void loadResources ();
   bool configure ();
-  
+
   // Heredados de FrameListener.
   bool frameStarted (const Ogre::FrameEvent& evt);
   bool frameEnded (const Ogre::FrameEvent& evt);
@@ -50,7 +54,7 @@ class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManag
   bool mouseMoved (const OIS::MouseEvent &e);
   bool mousePressed (const OIS::MouseEvent &e, OIS::MouseButtonID id);
   bool mouseReleased (const OIS::MouseEvent &e, OIS::MouseButtonID id);
-  
+
   // Gestor de eventos de entrada.
   InputManager *_inputMgr;
   // Estados del juego.
