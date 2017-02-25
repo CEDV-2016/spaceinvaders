@@ -1,10 +1,10 @@
 Pedro
-6000
+100
 Concha
-5000
+90
 Jose Juan
-4000
+80
 Luis
-4000
+70
 Maria
-3000
+60
