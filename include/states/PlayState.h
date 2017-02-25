@@ -37,6 +37,8 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   void createScene();
   void createGUI();
 
+  void setName(std::string name);
+
  protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;

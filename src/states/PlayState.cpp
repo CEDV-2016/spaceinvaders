@@ -12,10 +12,8 @@ PlayState::enter ()
 {
   _root = Ogre::Root::getSingletonPtr();
 
-  _sceneMgr = _root->createSceneManager("SceneManager");
-  _camera = _sceneMgr->createCamera("MainCamera");
-  _raySceneQuery = _sceneMgr->createRayQuery(Ogre::Ray());
-
+  _sceneMgr = _root->getSceneManager("SceneManager");
+  _camera = _sceneMgr->getCamera("MainCamera");
   createScene();
   createGUI();
 
@@ -111,4 +109,8 @@ void PlayState::createScene() {
 
 void PlayState::createGUI() {
   /* code */
+}
+
+void PlayState::setName(std::string name)
+{
 }
