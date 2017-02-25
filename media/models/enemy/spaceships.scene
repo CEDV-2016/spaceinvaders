@@ -1,0 +1,167 @@
+<scene previous_export_time="1488026221.3814423" export_time="1488048332.0798967" exported_by="pedroma" formatVersion="1.0.1" >
+  <nodes >
+    <node name="Point" >
+      <position y="1.407785" x="2.057233" z="2.450561" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point" >
+        <position y="1.407785" x="2.057233" z="2.450561" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.04" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Lamp" >
+      <position y="1.722978" x="1.190631" z="-0.252181" />
+      <rotation qy="0.755880" qw="0.570948" qx="0.169076" qz="-0.272171" />
+      <scale y="0.290000" x="0.290000" z="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp" >
+        <position y="1.722978" x="1.190631" z="-0.252181" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.03333335240683057" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+        <colourShadow r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Camera" >
+      <position y="25.000000" x="0.000000" z="-0.000000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <camera projectionType="perspective" fov="0.5033799435163735" name="Camera" >
+        <clipping nearPlaneDist="0.10000000149011612" far="100.0" near="0.10000000149011612" farPlaneDist="100.0" />
+      </camera>
+    </node>
+    <node name="Enemy" >
+      <position y="0.000000" x="0.000000" z="-0.000000" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <user_data value='&lt;bpy id prop: owner="OBEnemy", name="cycles", address=0x7ff9d8b24668&gt;' name="cycles" type="IDPropertyGroup" />
+      <user_data value='&lt;bpy id prop: owner="OBEnemy", name="cycles_visibility", address=0x7ff9d8b12b68&gt;' name="cycles_visibility" type="IDPropertyGroup" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity lock_trans_y="False" lock_rot_z="False" velocity_max="0.0" friction_z="1.0" velocity_min="0.0" anisotropic_friction="False" damping_rot="0.10000000149011612" lock_trans_x="False" name="Plane" physics_type="STATIC" inertia_tensor="0.4000000059604645" mass_radius="1.0" friction_x="1.0" ghost="False" actor="False" mass="1.0" lock_rot_y="False" lock_rot_x="False" friction_y="1.0" damping_trans="0.03999999910593033" meshFile="Plane.mesh" lock_trans_z="False" >
+        <user_data value='&lt;bpy id prop: owner="MEPlane", name="cycles", address=0x7ff9d8b12848&gt;' name="cycles" type="IDPropertyGroup" />
+      </entity>
+    </node>
+    <node name="Sun" >
+      <position y="0.000000" x="0.000000" z="-0.000000" />
+      <rotation qy="1.000000" qw="-0.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <user_data value='&lt;bpy id prop: owner="OBSun", name="cycles", address=0x7ff9d8b12a28&gt;' name="cycles" type="IDPropertyGroup" />
+      <user_data value='&lt;bpy id prop: owner="OBSun", name="cycles_visibility", address=0x7ff9d8b12988&gt;' name="cycles_visibility" type="IDPropertyGroup" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="directional" name="Sun" >
+        <position y="0.000000" x="0.000000" z="-0.000000" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.04" constant="1.0" />
+        <direction y="-1.0" x="-0.0" z="0.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Lamp.001" >
+      <position y="1.722978" x="-3.017929" z="-0.252181" />
+      <rotation qy="0.755880" qw="0.570948" qx="0.169076" qz="-0.272171" />
+      <scale y="0.290000" x="0.290000" z="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp.001" >
+        <position y="1.722978" x="-3.017929" z="-0.252181" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.03333335240683057" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+        <colourShadow r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Lamp.002" >
+      <position y="-1.772426" x="0.449216" z="1.234211" />
+      <rotation qy="0.755880" qw="0.570948" qx="0.169076" qz="-0.272171" />
+      <scale y="0.290000" x="0.290000" z="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp.002" >
+        <position y="-1.772426" x="0.449216" z="1.234211" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.03333335240683057" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+        <colourShadow r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Point.001" >
+      <position y="-2.066339" x="-2.079293" z="1.860154" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.001" >
+        <position y="-2.066339" x="-2.079293" z="1.860154" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.04" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Point.002" >
+      <position y="1.407785" x="-0.091037" z="-3.227009" />
+      <rotation qy="0.000000" qw="1.000000" qx="0.000000" qz="-0.000000" />
+      <scale y="1.000000" x="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.002" >
+        <position y="1.407785" x="-0.091037" z="-3.227009" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.04" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+    <node name="Lamp.003" >
+      <position y="-0.158531" x="1.427506" z="-2.721850" />
+      <rotation qy="0.755880" qw="0.570948" qx="0.169076" qz="-0.272171" />
+      <scale y="0.290000" x="0.290000" z="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp.003" >
+        <position y="-0.158531" x="1.427506" z="-2.721850" />
+        <lightAttenuation range="5000" quadratic="0.0" linear="0.03333335240683057" constant="1.0" />
+        <colourDiffuse r="1.0" b="1.0" g="1.0" />
+        <colourSpecular r="1.0" b="1.0" g="1.0" />
+        <colourShadow r="1.0" b="1.0" g="1.0" />
+      </light>
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/pedroma/CEDV/spaceinvaders/media/models/enemy/Enemy.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourAmbient r="0.0" b="0.0" g="0.0" />
+    <colourBackground r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+    <colourDiffuse r="0.05087608844041824" b="0.05087608844041824" g="0.05087608844041824" />
+  </environment>
+</scene>
