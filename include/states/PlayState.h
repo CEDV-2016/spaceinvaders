@@ -7,6 +7,7 @@
 #include <RendererModules/Ogre/Renderer.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "GameState.h"
 
@@ -39,6 +40,9 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
 
   void setName(std::string name);
 
+  void addPlayerShoot(int x, int z);
+  void updateShoots();
+
  protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;
@@ -53,6 +57,10 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   CEGUI::Window* _playGUI;
 
   bool _exitGame;
+
+  bool _moveRight, _moveLeft, _moveUp, _moveDown;
+  std::vector<Ogre::SceneNode *> _shoots;
+
 };
 
 #endif

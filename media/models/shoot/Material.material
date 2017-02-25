@@ -1,16 +1,16 @@
-// Ground genrated by blender2ogre 0.6.0
+// Material genrated by blender2ogre 0.6.0
 
-material Ground 
+material Material 
 {
     receive_shadows on 
 
     technique
     {
-        pass Ground
+        pass Material
         {
-            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
-            diffuse 0.7199999916553494 0.7199999916553494 0.7199999916553494 1.0
-            specular 0.05000000074505806 0.0 0.000143444237574104 1.0 12.5
+            ambient 0.8000000715255737 0.7564778327941895 0.12602514028549194 1.0
+            diffuse 0.8000000715255737 0.7564778327941895 0.12602514028549194 1.0
+            specular 0.5 0.4866534173488617 0.3084837794303894 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
 
             alpha_to_coverage off
@@ -30,13 +30,6 @@ material Ground
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
-            {
-                texture velvet.jpg
-                tex_address_mode wrap
-                scale 1.0 1.0
-                colour_op modulate
-            }
         }
     }
 }
