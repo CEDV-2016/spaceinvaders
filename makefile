@@ -63,7 +63,7 @@ $(DIROBJ)%.o: $(DIRSRC_MANAGERS)%.cpp
 # Temporals cleaning -----------------------------------------------------------
 clean:
 	$(RM) -r *.log $(EXEC) *~ $(DIROBJ) $(DIRSRC)*~ $(DIRHEA)*~
-	@find . -name 'mastermind.scene' -exec rm -vf {} \;
+	@find . -name 'spaceship.scene' -exec rm -vf {} \;
 
 
 dir:

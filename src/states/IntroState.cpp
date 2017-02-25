@@ -11,7 +11,22 @@ IntroState::enter ()
   _sceneMgr = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
   _camera = _sceneMgr->createCamera("MainCamera");
   _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
-  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 1.0));
+  _viewport->setBackgroundColour(Ogre::ColourValue(0.2, 0.4, 0.6));
+
+  // Creating and placing camera
+  _camera->setPosition(Ogre::Vector3(0, 25, 2)); //X Z -Y
+  _camera->lookAt(Ogre::Vector3(0, 0, 0));
+  _camera->setNearClipDistance(0.11);
+  _camera->setFarClipDistance(1000);
+  _camera->setFOVy(Ogre::Degree(40));
+  double width = _viewport->getActualWidth();
+  double height = _viewport->getActualHeight();
+  _camera->setAspectRatio(width / height);
+
+  /* And there was light! */
+  _sceneMgr->setAmbientLight(Ogre::ColourValue(1, 1, 1));
+  _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+
   createScene();
   createGUI();
 
@@ -48,7 +63,7 @@ IntroState::frameEnded
 (const Ogre::FrameEvent& evt)
 {
   if (_exitGame)
-    return false;
+  return false;
 
   return true;
 }
@@ -92,7 +107,7 @@ IntroState::mouseReleased
 IntroState*
 IntroState::getSingletonPtr ()
 {
-return msSingleton;
+  return msSingleton;
 }
 
 IntroState&

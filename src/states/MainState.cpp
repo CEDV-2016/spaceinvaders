@@ -18,6 +18,8 @@ void MainState::enter () {
 
   _sceneManager = _root->getSceneManager("SceneManager");
   _camera = _sceneManager->getCamera("MainCamera");
+  _viewport = _root->getAutoCreatedWindow()->getViewport(0);
+
   createGUI();
 
   _exit = false;

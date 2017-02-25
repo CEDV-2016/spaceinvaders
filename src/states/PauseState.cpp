@@ -9,7 +9,7 @@ PauseState::enter ()
 
   // Se recupera el gestor de escena y la cámara.
   _sceneMgr = _root->getSceneManager("SceneManager");
-  _camera = _sceneMgr->getCamera("IntroCamera");
+  _camera = _sceneMgr->getCamera("MainCamera");
   _viewport = _root->getAutoCreatedWindow()->getViewport(0);
   // Nuevo background colour.
   _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 1.0, 0.0));
@@ -45,7 +45,7 @@ PauseState::frameEnded
 {
   if (_exitGame)
     return false;
-  
+
   return true;
 }
 
@@ -86,7 +86,7 @@ return msSingleton;
 
 PauseState&
 PauseState::getSingleton ()
-{ 
+{
   assert(msSingleton);
   return *msSingleton;
 }

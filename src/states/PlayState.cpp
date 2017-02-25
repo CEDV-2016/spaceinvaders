@@ -1,5 +1,6 @@
 #include "PlayState.h"
 #include "PauseState.h"
+#include <iostream>
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -52,7 +53,7 @@ PlayState::frameEnded
 (const Ogre::FrameEvent& evt)
 {
   if (_exitGame)
-    return false;
+  return false;
 
   return true;
 }
@@ -61,6 +62,20 @@ void
 PlayState::keyPressed
 (const OIS::KeyEvent &e)
 {
+  Ogre::SceneNode* node_spaceship = _sceneMgr->getSceneNode("Spaceship");
+  if (e.key == OIS::KC_W) node_spaceship->translate(0, 0, -0.5);
+  if (e.key == OIS::KC_S) node_spaceship->translate(0, 0, 0.5);
+  if (e.key == OIS::KC_A) node_spaceship->translate(-0.5, 0, 0);
+  if (e.key == OIS::KC_D) node_spaceship->translate(0.5, 0, 0);
+
+  Ogre::Vector3 vt(0,0,0);
+  Ogre::Real tSpeed = 20.0;
+  if(e.key ==  OIS::KC_UP)   vt+=Ogre::Vector3(0,0,-1);
+  if(e.key == OIS::KC_DOWN)  vt+=Ogre::Vector3(0,0,1);
+  if(e.key == OIS::KC_LEFT)  vt+=Ogre::Vector3(-1,0,0);
+  if(e.key == OIS::KC_RIGHT) vt+=Ogre::Vector3(1,0,0);
+  _camera->moveRelative(vt * tSpeed);
+
 }
 
 void
@@ -93,7 +108,7 @@ PlayState::mouseReleased
 PlayState*
 PlayState::getSingletonPtr ()
 {
-return msSingleton;
+  return msSingleton;
 }
 
 PlayState&
@@ -104,7 +119,12 @@ PlayState::getSingleton ()
 }
 
 void PlayState::createScene() {
-  /* code */
+  // Creating the spaceship
+  Ogre::Entity* ent_spaceship = _sceneMgr->createEntity("Spaceship", "Spaceship.mesh");
+  Ogre::SceneNode* node_spaceship = _sceneMgr->createSceneNode("Spaceship");
+  node_spaceship->attachObject(ent_spaceship);
+  node_spaceship->setPosition(0, 0, 5);
+  _sceneMgr->getRootSceneNode()->addChild(node_spaceship);
 }
 
 void PlayState::createGUI() {
