@@ -31,13 +31,11 @@ PlayState::exit ()
 void
 PlayState::pause()
 {
-  _playGUI->show();
 }
 
 void
 PlayState::resume()
 {
-  _playGUI->show();
 }
 
 bool
@@ -69,6 +67,8 @@ PlayState::keyReleased
 {
   if (e.key == OIS::KC_ESCAPE) {
     _exitGame = true;
+  }else if(e.key == OIS::KC_P) {
+    pushState(PauseState::getSingletonPtr());
   }
 }
 

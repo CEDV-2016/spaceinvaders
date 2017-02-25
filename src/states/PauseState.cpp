@@ -1,4 +1,5 @@
 #include "PauseState.h"
+#include "IntroState.h"
 
 template<> PauseState* Ogre::Singleton<PauseState>::msSingleton = 0;
 
@@ -7,12 +8,9 @@ PauseState::enter ()
 {
   _root = Ogre::Root::getSingletonPtr();
 
-  // Se recupera el gestor de escena y la cámara.
   _sceneMgr = _root->getSceneManager("SceneManager");
-  _camera = _sceneMgr->getCamera("IntroCamera");
-  _viewport = _root->getAutoCreatedWindow()->getViewport(0);
-  // Nuevo background colour.
-  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 1.0, 0.0));
+  _camera = _sceneMgr->getCamera("MainCamera");
+  createGUI();
 
   _exitGame = false;
 }
@@ -20,6 +18,7 @@ PauseState::enter ()
 void
 PauseState::exit ()
 {
+  _pauseGUI->hide();
 }
 
 void
@@ -45,7 +44,7 @@ PauseState::frameEnded
 {
   if (_exitGame)
     return false;
-  
+
   return true;
 }
 
@@ -58,6 +57,7 @@ void
 PauseState::keyReleased
 (const OIS::KeyEvent &e)
 {
+  if (e.key == OIS::KC_P) popState();
 }
 
 void
@@ -86,7 +86,51 @@ return msSingleton;
 
 PauseState&
 PauseState::getSingleton ()
-{ 
+{
   assert(msSingleton);
   return *msSingleton;
+}
+
+void PauseState::createGUI()
+{
+  if(_pauseGUI == NULL){
+    //Config Window
+    _pauseGUI = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("pause.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_pauseGUI);
+
+    //Config Buttons
+    CEGUI::Window* resumeButton = _pauseGUI->getChild("ResumeButton");
+    resumeButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			     CEGUI::Event::Subscriber(&PauseState::back,
+						      this));
+    CEGUI::Window* restartButton = _pauseGUI->getChild("RestartButton");
+    restartButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+           CEGUI::Event::Subscriber(&PauseState::restart,
+              						      this));
+    CEGUI::Window* exitButton = _pauseGUI->getChild("ExitButton");
+    exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			     CEGUI::Event::Subscriber(&PauseState::exitPause,
+						      this));
+  } else{
+    _pauseGUI->show();
+  }
+}
+
+bool PauseState::back(const CEGUI::EventArgs &e)
+{
+  popState();
+  return true;
+}
+
+bool PauseState::restart(const CEGUI::EventArgs &e)
+{
+  //popState();
+  return true;
+}
+
+bool PauseState::exitPause(const CEGUI::EventArgs &e)
+{
+  popState();
+  //restartState(IntroState::getSingletonPtr());
+  return true;
 }
