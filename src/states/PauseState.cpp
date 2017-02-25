@@ -1,5 +1,6 @@
 #include "PauseState.h"
 #include "IntroState.h"
+#include "PlayState.h"
 
 template<> PauseState* Ogre::Singleton<PauseState>::msSingleton = 0;
 
@@ -124,7 +125,8 @@ bool PauseState::back(const CEGUI::EventArgs &e)
 
 bool PauseState::restart(const CEGUI::EventArgs &e)
 {
-  //popState();
+  popState();
+  //restartState(PlayState::getSingletonPtr());
   return true;
 }
 

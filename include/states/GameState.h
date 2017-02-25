@@ -3,7 +3,7 @@
 
 #include <Ogre.h>
 #include <OIS/OIS.h>
- 
+
 #include "GameManager.h"
 #include "InputManager.h"
 
@@ -14,7 +14,7 @@ class GameState {
 
  public:
   GameState() {}
-  
+
   // Gestión básica del estado.
   virtual void enter () = 0;
   virtual void exit () = 0;
@@ -26,19 +26,19 @@ class GameState {
   virtual void keyPressed (const OIS::KeyEvent &e) = 0;
   virtual void keyReleased (const OIS::KeyEvent &e) = 0;
 
-  virtual void mouseMoved (const OIS::MouseEvent &e) = 0; 
-  virtual void mousePressed (const OIS::MouseEvent &e, 
+  virtual void mouseMoved (const OIS::MouseEvent &e) = 0;
+  virtual void mousePressed (const OIS::MouseEvent &e,
 			     OIS::MouseButtonID id) = 0;
-  virtual void mouseReleased (const OIS::MouseEvent &e, 
+  virtual void mouseReleased (const OIS::MouseEvent &e,
 			      OIS::MouseButtonID id) = 0;
 
   // Gestión básica para la gestión
   // de eventos antes y después de renderizar un frame.
   virtual bool frameStarted (const Ogre::FrameEvent& evt) = 0;
   virtual bool frameEnded (const Ogre::FrameEvent& evt) = 0;
-	
+
   // Gestión básica de transiciones.
-  void changeState (GameState* state) { 
+  void changeState (GameState* state) {
     GameManager::getSingletonPtr()->changeState(state);
   }
   void pushState (GameState* state) {
@@ -46,6 +46,10 @@ class GameState {
   }
   void popState () {
     GameManager::getSingletonPtr()->popState();
+  }
+
+  void restartState (GameState* state) {
+    GameManager::getSingletonPtr()->changeState(state);
   }
 
 };
