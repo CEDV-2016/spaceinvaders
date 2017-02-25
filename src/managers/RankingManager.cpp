@@ -38,7 +38,7 @@ void RankingManager::setRanking (std::string name, int turns) {
 }
 
 void RankingManager::saveRankings () {
-  std::ofstream file ("media/rankings.txt");
+  std::ofstream file ("media/ranking.txt");
   if (file.is_open()) {
     for (int i = 0; i<10; i++) {
       file << _rankings[i] << std::endl;
@@ -49,7 +49,7 @@ void RankingManager::saveRankings () {
 
 void RankingManager::loadRankings () {
   std::string line;
-  std::ifstream file ("media/rankings.txt");
+  std::ifstream file ("media/ranking.txt");
   if (file.is_open()) {
     while (getline(file, line)) {
       _rankings.push_back(line);

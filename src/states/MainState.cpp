@@ -1,6 +1,7 @@
 #include "MainState.h"
 #include "NewGameState.h"
 #include "CreditsState.h"
+#include "RankingState.h"
 
 template<> MainState* Ogre::Singleton<MainState>::msSingleton = 0;
 
@@ -72,6 +73,9 @@ void MainState::createGUI()
     CEGUI::Window* _creditsButton = _main->getChild("CreditsButton");
     _creditsButton->subscribeEvent(CEGUI::PushButton::EventClicked,
        		 CEGUI::Event::Subscriber(&MainState::navigateToCredits,this));
+    CEGUI::Window* _rankingButton = _main->getChild("RankingButton");
+    _rankingButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+           CEGUI::Event::Subscriber(&MainState::navigateToRanking,this));
     CEGUI::Window* _exitButton = _main->getChild("ExitButton");
     _exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			     CEGUI::Event::Subscriber(&MainState::quit,this));
@@ -94,6 +98,7 @@ bool MainState::navigateToCredits(const CEGUI::EventArgs &e)
 
 bool MainState::navigateToRanking(const CEGUI::EventArgs &e)
 {
+  pushState(RankingState::getSingletonPtr());
   return true;
 }
 
