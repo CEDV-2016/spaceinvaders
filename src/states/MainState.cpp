@@ -1,4 +1,5 @@
 #include "MainState.h"
+#include "NewGameState.h"
 
 template<> MainState* Ogre::Singleton<MainState>::msSingleton = 0;
 
@@ -14,7 +15,6 @@ MainState& MainState::getSingleton () {
 void MainState::enter () {
   _root = Ogre::Root::getSingletonPtr();
 
-  // Se recupera el gestor de escena y la cámara.
   _sceneManager = _root->getSceneManager("SceneManager");
   _camera = _sceneManager->getCamera("MainCamera");
   createGUI();
@@ -28,9 +28,13 @@ void MainState::exit() {
   _root->getAutoCreatedWindow()->removeAllViewports();
 }
 
-void MainState::pause () {}
+void MainState::pause () {
+  _main->hide();
+}
 
-void MainState::resume () {}
+void MainState::resume () {
+  _main->show();
+}
 
 bool MainState::frameStarted (const Ogre::FrameEvent &evt) {
     return true;
@@ -61,6 +65,9 @@ void MainState::createGUI()
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_main);
 
     //Config Buttons
+    CEGUI::Window* _newButton = _main->getChild("NewButton");
+    _newButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			     CEGUI::Event::Subscriber(&MainState::newGame,this));
     CEGUI::Window* _exitButton = _main->getChild("ExitButton");
     _exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			     CEGUI::Event::Subscriber(&MainState::quit,this));
@@ -71,6 +78,7 @@ void MainState::createGUI()
 
 bool MainState::newGame(const CEGUI::EventArgs &e)
 {
+  pushState(NewGameState::getSingletonPtr());
   return true;
 }
 

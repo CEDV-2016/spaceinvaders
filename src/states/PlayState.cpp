@@ -3,17 +3,21 @@
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
+PlayState::PlayState(){
+  _playGUI = NULL;
+}
+
 void
 PlayState::enter ()
 {
   _root = Ogre::Root::getSingletonPtr();
 
-  // Se recupera el gestor de escena y la cámara.
-  _sceneMgr = _root->getSceneManager("SceneManager");
-  _camera = _sceneMgr->getCamera("IntroCamera");
-  _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
-  // Nuevo background colour.
-  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 1.0));
+  _sceneMgr = _root->createSceneManager("SceneManager");
+  _camera = _sceneMgr->createCamera("MainCamera");
+  _raySceneQuery = _sceneMgr->createRayQuery(Ogre::Ray());
+
+  createScene();
+  createGUI();
 
   _exitGame = false;
 }
@@ -21,6 +25,7 @@ PlayState::enter ()
 void
 PlayState::exit ()
 {
+  _playGUI->hide();
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
 }
@@ -28,13 +33,13 @@ PlayState::exit ()
 void
 PlayState::pause()
 {
+  _playGUI->show();
 }
 
 void
 PlayState::resume()
 {
-  // Se restaura el background colour.
-  _viewport->setBackgroundColour(Ogre::ColourValue(0.0, 0.0, 1.0));
+  _playGUI->show();
 }
 
 bool
@@ -50,7 +55,7 @@ PlayState::frameEnded
 {
   if (_exitGame)
     return false;
-  
+
   return true;
 }
 
@@ -95,7 +100,15 @@ return msSingleton;
 
 PlayState&
 PlayState::getSingleton ()
-{ 
+{
   assert(msSingleton);
   return *msSingleton;
+}
+
+void PlayState::createScene() {
+  /* code */
+}
+
+void PlayState::createGUI() {
+  /* code */
 }

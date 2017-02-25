@@ -1,19 +1,20 @@
-#ifndef PlayState_H
-#define PlayState_H
+#ifndef NewGameState_H
+#define NewGameState_H
 
 #include <Ogre.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayElement.h>
+#include <OgreOverlayManager.h>
 #include <OIS/OIS.h>
 #include <CEGUI.h>
 #include <RendererModules/Ogre/Renderer.h>
-#include <iostream>
-#include <string>
 
 #include "GameState.h"
 
-class PlayState : public Ogre::Singleton<PlayState>, public GameState
+class NewGameState : public Ogre::Singleton<NewGameState>, public GameState
 {
- public:
-  PlayState ();
+public:
+  NewGameState();
 
   void enter ();
   void exit ();
@@ -31,24 +32,27 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   bool frameEnded (const Ogre::FrameEvent& evt);
 
   // Heredados de Ogre::Singleton.
-  static PlayState& getSingleton ();
-  static PlayState* getSingletonPtr ();
+  static NewGameState& getSingleton ();
+  static NewGameState* getSingletonPtr ();
 
   void createScene();
   void createGUI();
 
- protected:
+  bool newGame(const CEGUI::EventArgs &e);
+  bool back(const CEGUI::EventArgs &e);
+
+protected:
   Ogre::Root* _root;
-  Ogre::SceneManager* _sceneMgr;
   Ogre::Viewport* _viewport;
   Ogre::Camera* _camera;
+  Ogre::SceneManager* _sceneManager;
   Ogre::RaySceneQuery *_raySceneQuery;
   Ogre::SceneNode *_selectedNode;
   CEGUI::OgreRenderer* renderer;
   OIS::InputManager* _inputManager;
   OIS::Keyboard* _keyboard;
   OIS::Mouse* _mouse;
-  CEGUI::Window* _playGUI;
+  CEGUI::Window* _newgameGUI, *_nameText;
 
   bool _exitGame;
 };
