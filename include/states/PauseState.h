@@ -30,11 +30,18 @@ class PauseState : public Ogre::Singleton<PauseState>, public GameState
   static PauseState& getSingleton ();
   static PauseState* getSingletonPtr ();
 
+  void createGUI();
+
+  bool back(const CEGUI::EventArgs &e);
+  bool restart(const CEGUI::EventArgs &e);
+  bool exitPause(const CEGUI::EventArgs &e);
+
  protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;
   Ogre::Viewport* _viewport;
   Ogre::Camera* _camera;
+  CEGUI::Window* _pauseGUI;
 
   bool _exitGame;
 };

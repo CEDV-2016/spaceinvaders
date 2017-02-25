@@ -34,13 +34,11 @@ PlayState::exit ()
 void
 PlayState::pause()
 {
-  _playGUI->show();
 }
 
 void
 PlayState::resume()
 {
-  _playGUI->show();
 }
 
 bool
@@ -93,6 +91,7 @@ PlayState::keyReleased
 (const OIS::KeyEvent &e)
 {
   if (e.key == OIS::KC_ESCAPE) _exitGame = true;
+  if (e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
 
   if (e.key == OIS::KC_W) _moveUp = false;
   if (e.key == OIS::KC_S) _moveDown = false;
@@ -102,10 +101,8 @@ PlayState::keyReleased
   if (e.key == OIS::KC_SPACE) {
     Ogre::SceneNode* node_spaceship = _sceneMgr->getSceneNode("Spaceship");
     Ogre::Vector3 aux_vector = node_spaceship->getPosition();
-
     addPlayerShoot(aux_vector.x, aux_vector.z);
   }
-
 }
 
 void

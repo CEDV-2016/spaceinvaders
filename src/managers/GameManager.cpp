@@ -118,6 +118,22 @@ GameManager::popState ()
 }
 
 void
+GameManager::restartState
+(GameState* state)
+{
+  // Limpieza de la pila
+  while (!_states.empty()) {
+    _states.top()->exit();
+    _states.pop();
+  }
+
+  // Transición al nuevo estado.
+  _states.push(state);
+  // enter() sobre el nuevo estado.
+  _states.top()->enter();
+}
+
+void
 GameManager::loadResources ()
 {
   Ogre::ConfigFile cf;
