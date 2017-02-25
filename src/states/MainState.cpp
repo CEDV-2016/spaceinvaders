@@ -1,5 +1,6 @@
 #include "MainState.h"
 #include "NewGameState.h"
+#include "CreditsState.h"
 
 template<> MainState* Ogre::Singleton<MainState>::msSingleton = 0;
 
@@ -68,6 +69,9 @@ void MainState::createGUI()
     CEGUI::Window* _newButton = _main->getChild("NewButton");
     _newButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			     CEGUI::Event::Subscriber(&MainState::newGame,this));
+    CEGUI::Window* _creditsButton = _main->getChild("CreditsButton");
+    _creditsButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+       		 CEGUI::Event::Subscriber(&MainState::navigateToCredits,this));
     CEGUI::Window* _exitButton = _main->getChild("ExitButton");
     _exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			     CEGUI::Event::Subscriber(&MainState::quit,this));
@@ -84,6 +88,7 @@ bool MainState::newGame(const CEGUI::EventArgs &e)
 
 bool MainState::navigateToCredits(const CEGUI::EventArgs &e)
 {
+  pushState(CreditsState::getSingletonPtr());
   return true;
 }
 
