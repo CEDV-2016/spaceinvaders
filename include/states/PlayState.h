@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "GameState.h"
+#include "Enemy.h"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -41,6 +42,8 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   void setName(std::string name);
 
   void addPlayerShoot(int x, int z);
+  void addEnemyShoot(int x, int z);
+  void updateEnemies();
   void updateShoots();
 
  protected:
@@ -59,7 +62,9 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   bool _exitGame;
 
   bool _moveRight, _moveLeft, _moveUp, _moveDown;
-  std::vector<Ogre::SceneNode *> _shoots;
+  std::vector<Ogre::SceneNode *> _player_shoots, _enemy_shoots;
+  std::vector<Enemy> _enemies;
+  void createGreenShootMaterial();
 
 };
 

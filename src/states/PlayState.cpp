@@ -20,7 +20,10 @@ PlayState::enter ()
 
   _exitGame = false;
   _moveUp = _moveDown = _moveRight = _moveLeft = false;
-  _shoots.clear();
+  _player_shoots.clear();
+  _enemy_shoots.clear();
+
+  createGreenShootMaterial();
 }
 
 void
@@ -29,6 +32,7 @@ PlayState::exit ()
   _playGUI->hide();
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
+  _enemies.clear();
 }
 
 void
@@ -52,6 +56,7 @@ PlayState::frameStarted
   if (_moveLeft) node_spaceship->translate(-0.05, 0, 0);
   if (_moveRight) node_spaceship->translate(0.05, 0, 0);
 
+  updateEnemies();
   updateShoots();
   return true;
 }
@@ -144,18 +149,11 @@ void PlayState::createScene() {
   node_spaceship->setPosition(0, 0, 5);
   _sceneMgr->getRootSceneNode()->addChild(node_spaceship);
 
-  // Creating two enemy
-  Ogre::Entity* ent_enemy1 = _sceneMgr->createEntity("Enemy1", "Enemy.mesh");
-  Ogre::SceneNode* node_enemy1 = _sceneMgr->createSceneNode("Enemy1");
-  node_enemy1->attachObject(ent_enemy1);
-  node_enemy1->setPosition(4, 0, -5);
-  _sceneMgr->getRootSceneNode()->addChild(node_enemy1);
-
-  Ogre::Entity* ent_enemy2 = _sceneMgr->createEntity("Enemy2", "Enemy.mesh");
-  Ogre::SceneNode* node_enemy2 = _sceneMgr->createSceneNode("Enemy2");
-  node_enemy2->attachObject(ent_enemy2);
-  node_enemy2->setPosition(-4, 0, -5);
-  _sceneMgr->getRootSceneNode()->addChild(node_enemy2);
+  // Creating 3 enemies
+  for (int i = 0; i < 3; i++) {
+    Enemy aux(_sceneMgr);
+    _enemies.push_back(aux);
+  }
 }
 
 void PlayState::createGUI() {
@@ -174,7 +172,33 @@ void PlayState::addPlayerShoot(int x, int z)
   node_shoot->setPosition(x+0.05, 0, z);
   _sceneMgr->getRootSceneNode()->addChild(node_shoot);
 
-  _shoots.push_back(node_shoot);
+  _player_shoots.push_back(node_shoot);
+}
+
+void PlayState::addEnemyShoot(int x, int z)
+{
+  Ogre::Entity* ent_shoot = _sceneMgr->createEntity("Shoot.mesh");
+  ent_shoot->getSubEntity(0)->setMaterialName("green_shoot");
+  Ogre::SceneNode* node_shoot = _sceneMgr->createSceneNode();
+  node_shoot->attachObject(ent_shoot);
+  node_shoot->setPosition(x+0.05, 0, z);
+  _sceneMgr->getRootSceneNode()->addChild(node_shoot);
+
+  _enemy_shoots.push_back(node_shoot);
+}
+
+void PlayState::updateEnemies()
+{
+  Ogre::Vector3 aux_vector;
+  for (std::size_t i = 0; i < _enemies.size(); i++) {
+    _enemies[i].updatePosition();
+
+    if (_enemies[i].shoot())
+    {
+        aux_vector = _enemies[i].getPosition();
+        addEnemyShoot(aux_vector.x, aux_vector.z);
+    }
+  }
 }
 
 void PlayState::updateShoots()
@@ -183,18 +207,37 @@ void PlayState::updateShoots()
   Ogre::SceneNode* aux_node;
   Ogre::Vector3 aux_vector;
   std::size_t i;
-  for (i = 0; i < _shoots.size(); i++) {
-    aux_node = _shoots[i];
+  for (i = 0; i < _player_shoots.size(); i++) {
+    aux_node = _player_shoots[i];
     aux_vector = aux_node->getPosition();
 
-    if (aux_vector.z < -30)
-    {
+    if (aux_vector.z < -30) {
       // _sceneMgr->destroySceneNode(aux_node);
-      // _shoots.remove(aux_node);
+      // _player_shoots.remove(aux_node);
     }
-    else
-    {
+    else {
       aux_node->translate(0, 0, -0.03);
     }
   }
+
+  for (i = 0; i < _enemy_shoots.size(); i++) {
+    aux_node = _enemy_shoots[i];
+    aux_vector = aux_node->getPosition();
+
+    if (aux_vector.z > 30) {
+      // _sceneMgr->destroySceneNode(aux_node);
+      // _enemy_shoots.remove(aux_node);
+    }
+    else {
+      aux_node->translate(0, 0, 0.035);
+    }
+  }
+}
+
+void PlayState::createGreenShootMaterial() {
+  Ogre::MaterialPtr mPtr = Ogre::MaterialManager::getSingleton().create
+  ("green_shoot", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, true);
+  mPtr->setAmbient(Ogre::ColourValue(0.2, 0.6, 0.2));
+  mPtr.getPointer()->getTechnique(0)->getPass(0)->setDiffuse(0.4, 0.4, 0.4, 0);
+  mPtr.getPointer()->getTechnique(0)->getPass(0)->setSpecular(0.4, 0.4, 0.4, 0);
 }
