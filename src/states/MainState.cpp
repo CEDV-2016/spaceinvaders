@@ -27,7 +27,6 @@ void MainState::enter () {
 }
 
 void MainState::exit() {
-  _main->hide();
   _sceneManager->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
 }

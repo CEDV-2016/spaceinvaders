@@ -23,17 +23,20 @@ NewGameState::enter ()
 void
 NewGameState::exit ()
 {
-  _newgameGUI->hide();
+  _sceneManager->clearScene();
+  _root->getAutoCreatedWindow()->removeAllViewports();
 }
 
 void
 NewGameState::pause ()
 {
+  _newgameGUI->hide();
 }
 
 void
 NewGameState::resume ()
 {
+  _newgameGUI->show();
 }
 
 bool
@@ -120,7 +123,7 @@ bool NewGameState::newGame(const CEGUI::EventArgs &e)
 {
   PlayState* playState = PlayState::getSingletonPtr();
   playState->setName(_nameText->getText().c_str());
-  changeState(playState);
+  pushState(playState);
   return true;
 }
 

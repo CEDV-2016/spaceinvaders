@@ -104,10 +104,6 @@ void PauseState::createGUI()
     resumeButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			     CEGUI::Event::Subscriber(&PauseState::back,
 						      this));
-    CEGUI::Window* restartButton = _pauseGUI->getChild("RestartButton");
-    restartButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-           CEGUI::Event::Subscriber(&PauseState::restart,
-              						      this));
     CEGUI::Window* exitButton = _pauseGUI->getChild("ExitButton");
     exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			     CEGUI::Event::Subscriber(&PauseState::exitPause,
@@ -123,16 +119,8 @@ bool PauseState::back(const CEGUI::EventArgs &e)
   return true;
 }
 
-bool PauseState::restart(const CEGUI::EventArgs &e)
-{
-  popState();
-  //restartState(PlayState::getSingletonPtr());
-  return true;
-}
-
 bool PauseState::exitPause(const CEGUI::EventArgs &e)
 {
-  popState();
-  //restartState(IntroState::getSingletonPtr());
+  restartState(IntroState::getSingletonPtr());
   return true;
 }

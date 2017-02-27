@@ -127,7 +127,7 @@ void EndState::createGUI()
 bool EndState::finish(const CEGUI::EventArgs &e)
 {
   this->popState();
-  //restartState(IntroState::getSingletonPtr());
+  restartState(IntroState::getSingletonPtr());
   return true;
 }
 

@@ -1,7 +1,6 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "EndState.h"
-#include <iostream>
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -30,7 +29,6 @@ PlayState::enter ()
 void
 PlayState::exit ()
 {
-  _playGUI->hide();
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
   _enemies.clear();
@@ -96,8 +94,7 @@ void
 PlayState::keyReleased
 (const OIS::KeyEvent &e)
 {
-  if (e.key == OIS::KC_ESCAPE) _exitGame = true;
-  if (e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
+  if (e.key == OIS::KC_ESCAPE || e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
   if (e.key == OIS::KC_O) pushState(EndState::getSingletonPtr());
 
   if (e.key == OIS::KC_W) _moveUp = false;

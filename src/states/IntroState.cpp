@@ -6,10 +6,16 @@ template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 void
 IntroState::enter ()
 {
-  _root = Ogre::Root::getSingletonPtr();
+  if (_root == NULL) {
+    _root = Ogre::Root::getSingletonPtr();
+  }
+  if (_sceneMgr == NULL) {
+    _sceneMgr = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
+  }
+  if (_camera == NULL) {
+    _camera = _sceneMgr->createCamera("MainCamera");
+  }
 
-  _sceneMgr = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
-  _camera = _sceneMgr->createCamera("MainCamera");
   _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
   _viewport->setBackgroundColour(Ogre::ColourValue(0.2, 0.4, 0.6));
 
@@ -36,7 +42,8 @@ IntroState::enter ()
 void
 IntroState::exit()
 {
-  _intro->hide();
+  _sceneMgr->clearScene();
+  _root->getAutoCreatedWindow()->removeAllViewports();
 }
 
 void
@@ -81,7 +88,7 @@ IntroState::keyReleased
   if (e.key == OIS::KC_ESCAPE) {
     _exitGame = true;
   }else if (e.key == OIS::KC_SPACE) {
-    changeState(MainState::getSingletonPtr());
+    pushState(MainState::getSingletonPtr());
   }
 }
 
@@ -126,7 +133,6 @@ void IntroState::createGUI()
     //Config Window
     _intro = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("splash.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_intro);
-
   } else{
     _intro->show();
   }

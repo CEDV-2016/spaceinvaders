@@ -49,7 +49,7 @@ class GameState {
   }
 
   void restartState (GameState* state) {
-    GameManager::getSingletonPtr()->changeState(state);
+    GameManager::getSingletonPtr()->restartState(state);
   }
 
 };
