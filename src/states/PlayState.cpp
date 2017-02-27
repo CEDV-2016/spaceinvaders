@@ -1,5 +1,6 @@
 #include "PlayState.h"
 #include "PauseState.h"
+#include "EndState.h"
 #include <iostream>
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
@@ -97,6 +98,7 @@ PlayState::keyReleased
 {
   if (e.key == OIS::KC_ESCAPE) _exitGame = true;
   if (e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
+  if (e.key == OIS::KC_O) pushState(EndState::getSingletonPtr());
 
   if (e.key == OIS::KC_W) _moveUp = false;
   if (e.key == OIS::KC_S) _moveDown = false;
