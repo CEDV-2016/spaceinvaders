@@ -95,7 +95,7 @@ PlayState::keyReleased
 (const OIS::KeyEvent &e)
 {
   if (e.key == OIS::KC_ESCAPE || e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
-  if (e.key == OIS::KC_O) pushState(EndState::getSingletonPtr());
+  if (e.key == OIS::KC_O) endGame(true, "Test", "150");
 
   if (e.key == OIS::KC_W) _moveUp = false;
   if (e.key == OIS::KC_S) _moveDown = false;
@@ -239,4 +239,10 @@ void PlayState::createGreenShootMaterial() {
   mPtr->setAmbient(Ogre::ColourValue(0.2, 0.6, 0.2));
   mPtr.getPointer()->getTechnique(0)->getPass(0)->setDiffuse(0.4, 0.4, 0.4, 0);
   mPtr.getPointer()->getTechnique(0)->getPass(0)->setSpecular(0.4, 0.4, 0.4, 0);
+}
+
+void PlayState::endGame(bool win, std::string name, std::string points){
+  EndState* endState = EndState::getSingletonPtr();
+  endState->setData(true, "Test", "150");//game->getPlayerName(), std::to_string(_game->getPoints()));
+  pushState(endState);
 }

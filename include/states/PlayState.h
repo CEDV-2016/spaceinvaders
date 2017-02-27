@@ -45,6 +45,7 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   void addEnemyShoot(int x, int z);
   void updateEnemies();
   void updateShoots();
+  void endGame(bool win, std::string name, std::string points);
 
  protected:
   Ogre::Root* _root;

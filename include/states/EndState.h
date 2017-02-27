@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "GameState.h"
+#include "RankingManager.h"
 
 class EndState : public Ogre::Singleton<EndState>, public GameState
 {
@@ -45,6 +46,7 @@ protected:
   CEGUI::Window* _endGUI, *_titleView, *_nameView, *_pointsView;
   std::string _name, _points;
   bool _win;
+  RankingManager* _rankingManager;
 
   bool _exitGame;
 };
