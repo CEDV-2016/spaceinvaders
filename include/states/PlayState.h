@@ -11,10 +11,11 @@
 
 #include "GameState.h"
 #include "Enemy.h"
+#include "Shoot.h"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
- public:
+public:
   PlayState ();
 
   void enter ();
@@ -39,15 +40,17 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   void createScene();
   void createGUI();
 
-  void setName(std::string name);
+  void setPlayerName(std::string name);
 
-  void addPlayerShoot(int x, int z);
-  void addEnemyShoot(int x, int z);
+  void movePlayer();
+  void addPlayerShoot(Ogre::Vector3 position);
+  void addEnemyShoot(Ogre::Vector3 position);
   void updateEnemies();
   void updateShoots();
+  void checkCollitions();
   void endGame(bool win, std::string name, std::string points);
 
- protected:
+protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;
   Ogre::Viewport* _viewport;
@@ -63,7 +66,7 @@ class PlayState : public Ogre::Singleton<PlayState>, public GameState
   bool _exitGame;
 
   bool _moveRight, _moveLeft, _moveUp, _moveDown;
-  std::vector<Ogre::SceneNode *> _player_shoots, _enemy_shoots;
+  std::vector<Shoot> _player_shoots, _enemy_shoots;
   std::vector<Enemy> _enemies;
   void createGreenShootMaterial();
 

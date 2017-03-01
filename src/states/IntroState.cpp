@@ -20,8 +20,8 @@ IntroState::enter ()
   _viewport->setBackgroundColour(Ogre::ColourValue(0.2, 0.4, 0.6));
 
   // Creating and placing camera
-  _camera->setPosition(Ogre::Vector3(0, 25, 2)); //X Z -Y
-  _camera->lookAt(Ogre::Vector3(0, 0, 0));
+  _camera->setPosition(Ogre::Vector3(0, 20, 15)); //X Z -Y
+  _camera->lookAt(Ogre::Vector3::ZERO);
   _camera->setNearClipDistance(0.11);
   _camera->setFarClipDistance(1000);
   _camera->setFOVy(Ogre::Degree(40));

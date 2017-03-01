@@ -8,7 +8,7 @@ Enemy::Enemy(Ogre::SceneManager* sceneMgr)
   int min_x = -10, max_x = 10;
   int rand_x = rand() % (max_x - min_x + 1) + min_x;
 
-  _position = Ogre::Vector3 (rand_x, 0, -15);
+  _position = Ogre::Vector3 (rand_x, 0, -20);
 
   Ogre::Entity * entity = _sceneMgr->createEntity("Enemy.mesh");
   _node = _sceneMgr->createSceneNode();
@@ -17,7 +17,7 @@ Enemy::Enemy(Ogre::SceneManager* sceneMgr)
   _sceneMgr->getRootSceneNode()->addChild(_node);
 }
 
-Enemy::~Enemy() {}
+Enemy::~Enemy() { }
 
 void Enemy::updatePosition()
 {
@@ -25,11 +25,11 @@ void Enemy::updatePosition()
   {
     int min_x = -10, max_x = 10;
     int rand_x = rand() % (max_x - min_x + 1) + min_x;
-    _position = Ogre::Vector3 (rand_x, 0, -15);
+    _position = Ogre::Vector3 (rand_x, 0, -20);
   }
   else
   {
-    _position += Ogre::Vector3(0, 0, 0.02);
+    _position += Ogre::Vector3(0, 0, 0.025);
   }
   _node->setPosition(_position);
 }
