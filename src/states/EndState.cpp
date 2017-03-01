@@ -11,7 +11,6 @@ void
 EndState::enter ()
 {
   _root = Ogre::Root::getSingletonPtr();
-  _rankingManager = new RankingManager();
 
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
@@ -137,5 +136,6 @@ void EndState::setData(bool win, std::string name, std::string points)
   _win = win;
   _name = name;
   _points = points;
-  //_rankingManager->setRanking(name, 150);//_game->getPlayerName(), _game->getPoints());
+  _rankingManager = new RankingManager();
+  _rankingManager->setRanking(name, 150);//_game->getPlayerName(), _game->getPoints());
 }

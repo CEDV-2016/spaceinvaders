@@ -1,3 +1,5 @@
+Test
+150
 Pedro
 100
 Concha
@@ -6,5 +8,3 @@ Jose Juan
 80
 Luis
 70
-Maria
-60
