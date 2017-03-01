@@ -23,8 +23,7 @@ NewGameState::enter ()
 void
 NewGameState::exit ()
 {
-  _sceneManager->clearScene();
-  _root->getAutoCreatedWindow()->removeAllViewports();
+  _newgameGUI->hide();
 }
 
 void

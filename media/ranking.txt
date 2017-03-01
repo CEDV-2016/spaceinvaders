@@ -1,10 +1,10 @@
 Test
 150
+Test
+150
+Test
+150
 Pedro
 100
 Concha
 90
-Jose Juan
-80
-Luis
-70

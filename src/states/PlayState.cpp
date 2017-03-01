@@ -16,7 +16,7 @@ PlayState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   createScene();
-  createGUI();
+  //createGUI();
 
   _exitGame = false;
   _moveUp = _moveDown = _moveRight = _moveLeft = false;
@@ -30,6 +30,7 @@ PlayState::enter ()
 void
 PlayState::exit ()
 {
+  _playGUI->hide();
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
   _enemies.clear();
@@ -146,7 +147,16 @@ void PlayState::createScene() {
 
 void PlayState::createGUI()
 {
-  /* code */
+  if(_playGUI == NULL){
+    //Config Window
+    _playGUI = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("play.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_playGUI);
+
+    //Config Buttons
+
+  } else{
+    _playGUI->show();
+  }
 }
 
 void PlayState::setPlayerName(std::string name)
