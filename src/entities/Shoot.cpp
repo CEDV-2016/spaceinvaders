@@ -19,36 +19,66 @@ Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
 
 Shoot::~Shoot() { }
 
-void Shoot::updatePosition()
+bool Shoot::updatePosition()
 {
   if (_valid)
   {
     switch(_shooter)
     {
       case PLAYER_SHOOT:
-      if (_node->getPosition().z < -35) {
-        _valid = false;
-        _sceneMgr->destroySceneNode(_node);
+      if (_node->getPosition().z < -35)
+      {
+        destroyShoot();
       }
-      else _node->translate(0, 0, -0.04); //move up
+      else
+      {
+        _node->translate(0, 0, -0.04); //move up
+      }
       break;
 
       case ENEMY_SHOOT:
-      if (_node->getPosition().z > 30) {
-        _valid = false;
-        _sceneMgr->destroySceneNode(_node);
+      if (_node->getPosition().z > 30)
+      {
+        destroyShoot();
       }
-      else _node->translate(0, 0, 0.04); //move down
+      else
+      {
+        _node->translate(0, 0, 0.04); //move down
+      }
       break;
     }
   }
+  return _valid;
 }
+
+
+void Shoot::destroyShoot()
+{
+  _valid = false;
+  try
+  {
+    _sceneMgr->destroySceneNode(_node);
+  }
+  catch (Ogre::Exception ex) {} // just in case the node has been already removed
+}
+
 
 bool Shoot::checkCollition(Ogre::SceneNode * node)
 {
-  if (_valid)
+  float x_margin = 0.5, z_margin = 0.35;
+  if (_valid && _node)
   {
-     return false;
+    Ogre::Vector3 spaceship_position = node->getPosition();
+    Ogre::Vector3 my_position = _node->getPosition();
+
+    if ( fabs( my_position.z - spaceship_position.z ) <= z_margin ) //checks Z axis
+    {
+      if ( fabs( my_position.x - spaceship_position.x ) <= x_margin ) //checks X axis
+      {
+        destroyShoot();
+        return true;
+      }
+    }
   }
-  else return false;
+  return false;
 }
