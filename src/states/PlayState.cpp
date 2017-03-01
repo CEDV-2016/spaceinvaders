@@ -33,6 +33,8 @@ PlayState::exit ()
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
   _enemies.clear();
+  _enemy_shoots.clear();
+  _player_shoots.clear();
 }
 
 void
@@ -49,11 +51,19 @@ bool
 PlayState::frameStarted
 (const Ogre::FrameEvent& evt)
 {
+  // Moves the player basing on the pressed keys
   movePlayer();
 
+  // Updates the enemies' position and makes them shoot
   updateEnemies();
+
+  // Updates the position of all shoots
   updateShoots();
+
+  // Checks whether a collition between spaceships and shoots has occurred
   checkCollitions();
+
+  _evenFrame = !_evenFrame;
 
   return true;
 }
@@ -181,18 +191,79 @@ void PlayState::updateEnemies()
 
 void PlayState::updateShoots()
 {
+  bool valid;
   for (std::size_t i = 0; i < _player_shoots.size(); i++) {
-    _player_shoots[i].updatePosition();
+    valid = _player_shoots[i].updatePosition();
+
+    if (!valid) // if it goes out of the screen will be deleted
+    {
+      _player_shoots.erase(_player_shoots.begin() + i);
+      i--;
+    }
   }
 
   for (std::size_t i = 0; i < _enemy_shoots.size(); i++) {
-    _enemy_shoots[i].updatePosition();
+    valid = _enemy_shoots[i].updatePosition();
+
+    if (!valid)
+    {
+      _enemy_shoots.erase(_enemy_shoots.begin() + i);
+      i--;
+    }
   }
 }
 
+// On even frames checking player collitions and on odd ones enemies collitions
 void PlayState::checkCollitions()
 {
+  if (_evenFrame)
+  {
+    checkPlayerCollitions();
+  }
+  else
+  {
+    checkEnemiesCollitions();
+  }
+}
 
+void PlayState::checkPlayerCollitions()
+{
+  Ogre::SceneNode* node_spaceship = _sceneMgr->getSceneNode("Spaceship");
+  bool collition;
+
+  for (std::size_t i = 0; i < _enemy_shoots.size(); i++) { //for each enemy shoot
+
+    collition = _enemy_shoots[i].checkCollition(node_spaceship);
+
+    if (collition) // deleting shoot and decreasing players health
+    {
+      _enemy_shoots.erase(_enemy_shoots.begin() + i);
+      i--;
+      std::cout << "COLLITION DETECTED (player & enemy shoot)" << "\n";
+    }
+  }
+}
+
+void PlayState::checkEnemiesCollitions()
+{
+  bool collition;
+
+  for (std::size_t i = 0; i < _player_shoots.size(); i++) { //for each player shoot
+
+    for (std::size_t j = 0; j < _enemies.size(); j++) { //for each enemy
+
+      collition = _player_shoots[i].checkCollition(_enemies[j].getSceneNode());
+
+      if (collition) // deleting shoot and enemy
+      {
+        _player_shoots.erase(_player_shoots.begin() + i);
+        i--;
+        _enemies.erase(_enemies.begin() + j);
+        j--;
+        std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+      }
+    }
+  }
 }
 
 void PlayState::createGreenShootMaterial()

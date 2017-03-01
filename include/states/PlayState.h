@@ -48,6 +48,8 @@ public:
   void updateEnemies();
   void updateShoots();
   void checkCollitions();
+  void checkPlayerCollitions();
+  void checkEnemiesCollitions();
   void endGame(bool win, std::string name, std::string points);
 
 protected:
@@ -64,6 +66,7 @@ protected:
   CEGUI::Window* _playGUI;
 
   bool _exitGame;
+  bool _evenFrame;
 
   bool _moveRight, _moveLeft, _moveUp, _moveDown;
   std::vector<Shoot> _player_shoots, _enemy_shoots;
