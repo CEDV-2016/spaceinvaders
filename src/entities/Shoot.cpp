@@ -8,7 +8,7 @@ Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
   Ogre::Entity * ent_shoot = _sceneMgr->createEntity("Shoot.mesh");
 
   if (_shooter == ENEMY_SHOOT) {
-    ent_shoot->setMaterialName("Green.material");
+    ent_shoot->setMaterialName("EnemyShoot.material");
   }
 
   _node = _sceneMgr->createSceneNode();

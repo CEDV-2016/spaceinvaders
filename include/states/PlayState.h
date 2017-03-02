@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "GameState.h"
+#include "Player.h"
 #include "Enemy.h"
 #include "Shoot.h"
 
@@ -71,6 +72,7 @@ protected:
   bool _moveRight, _moveLeft, _moveUp, _moveDown;
   std::vector<Shoot> _player_shoots, _enemy_shoots;
   std::vector<Enemy> _enemies;
+  Player _player;
 };
 
 #endif

@@ -101,9 +101,7 @@ PlayState::keyReleased
   if (e.key == OIS::KC_D) _moveRight = false;
 
   if (e.key == OIS::KC_SPACE) {
-    Ogre::SceneNode* node_spaceship = _sceneMgr->getSceneNode("Spaceship");
-    Ogre::Vector3 position = node_spaceship->getPosition();
-    addPlayerShoot(position);
+    addPlayerShoot(_player.getPosition() );
   }
 }
 
@@ -146,12 +144,7 @@ void PlayState::createScene() {
 
 
   // Creating the spaceship
-  Ogre::Entity* ent_spaceship = _sceneMgr->createEntity("Spaceship", "Spaceship.mesh");
-  ent_spaceship->setCastShadows(true);
-  Ogre::SceneNode* node_spaceship = _sceneMgr->createSceneNode("Spaceship");
-  node_spaceship->attachObject(ent_spaceship);
-  node_spaceship->setPosition(0, 1, 5);
-  _sceneMgr->getRootSceneNode()->addChild(node_spaceship);
+  _player.create(_sceneMgr);
 
   // Creating the ground
   Ogre::Plane plane1(Ogre::Vector3::UNIT_Y, 0);
@@ -254,7 +247,7 @@ void PlayState::checkCollitions()
 
 void PlayState::checkPlayerCollitions()
 {
-  Ogre::SceneNode* node_spaceship = _sceneMgr->getSceneNode("Spaceship");
+  Ogre::SceneNode* node_spaceship = _player.getSceneNode();
   bool collition;
 
   for (std::size_t i = 0; i < _enemy_shoots.size(); i++) { //for each enemy shoot
@@ -294,12 +287,10 @@ void PlayState::checkEnemiesCollitions()
 
 void PlayState::movePlayer()
 {
-  Ogre::SceneNode* node_spaceship = _sceneMgr->getSceneNode("Spaceship");
-
-  if (_moveUp)    node_spaceship->translate(0, 0, -0.05);
-  if (_moveDown)  node_spaceship->translate(0, 0, 0.05);
-  if (_moveLeft)  node_spaceship->translate(-0.05, 0, 0);
-  if (_moveRight) node_spaceship->translate(0.05, 0, 0);
+  if (_moveUp)    _player.moveForward();
+  if (_moveDown)  _player.moveBackward();
+  if (_moveLeft)  _player.moveLeft();
+  if (_moveRight) _player.moveRight();
 }
 
 void PlayState::endGame(bool win, std::string name, std::string points){

@@ -7,6 +7,7 @@ Enemy::Enemy(Ogre::SceneManager* sceneMgr)
   _position = Ogre::Vector3 ( getRandomXPosition(), 0, -20 );
 
   Ogre::Entity * entity = _sceneMgr->createEntity("Enemy.mesh");
+  entity->setCastShadows(true);
   _node = _sceneMgr->createSceneNode();
   _node->attachObject(entity);
   _node->setPosition(_position);
