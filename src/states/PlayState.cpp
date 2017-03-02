@@ -291,6 +291,7 @@ void PlayState::movePlayer()
   if (_moveDown)  _player.moveBackward();
   if (_moveLeft)  _player.moveLeft();
   if (_moveRight) _player.moveRight();
+  if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState();
 }
 
 void PlayState::endGame(bool win, std::string name, std::string points){

@@ -5,6 +5,10 @@
 #include <CEGUI.h>
 #include <RendererModules/Ogre/Renderer.h>
 
+#define MAX_ROLL 45
+#define MAX_PITCH 35
+#define TURN_DEGREE 0.5
+
 class Player
 {
 public:
@@ -17,9 +21,12 @@ public:
   void moveBackward();
   void moveRight();
   void moveLeft();
+  void moveToInitialState();
+  void setOrientation();
 
 private:
   Ogre::Vector3 _position;
   Ogre::SceneNode * _node;
   Ogre::SceneManager * _sceneMgr;
+  double _roll, _pitch;
 };
