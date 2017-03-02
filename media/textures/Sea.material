@@ -1,0 +1,18 @@
+material Sea.material
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 1.0 1.0 1.0
+			diffuse 0.5 0.5 0.5
+
+			texture_unit
+			{
+				texture sea.jpg
+				scroll_anim 0 -0.6
+			}
+		}
+	}
+}

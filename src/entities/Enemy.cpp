@@ -47,7 +47,7 @@ Ogre::SceneNode * Enemy::getSceneNode()
   return _node;
 }
 
-float Enemy::getRandomXPosition()
+double Enemy::getRandomXPosition()
 {
   int min_x = -100, max_x = 100;
   int rand_x = rand() % (max_x - min_x + 1) + min_x;

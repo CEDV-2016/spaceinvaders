@@ -14,10 +14,10 @@ public:
   bool shoot();
   Ogre::Vector3 getPosition();
   Ogre::SceneNode * getSceneNode();
-  
+
 private:
   Ogre::Vector3 _position;
   Ogre::SceneNode * _node;
   Ogre::SceneManager * _sceneMgr;
-  float getRandomXPosition();
+  double getRandomXPosition();
 };

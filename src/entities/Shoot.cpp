@@ -21,7 +21,7 @@ Shoot::~Shoot() { }
 
 bool Shoot::updatePosition()
 {
-  if (_valid)
+  if (_valid && _node)
   {
     switch(_shooter)
     {
@@ -55,11 +55,7 @@ bool Shoot::updatePosition()
 void Shoot::destroyShoot()
 {
   _valid = false;
-  try
-  {
-    _sceneMgr->destroySceneNode(_node);
-  }
-  catch (Ogre::Exception ex) {} // just in case the node has been already removed
+  if (_node) _sceneMgr->destroySceneNode(_node);
 }
 
 

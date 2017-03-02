@@ -141,12 +141,30 @@ PlayState::getSingleton ()
 }
 
 void PlayState::createScene() {
+  // Creating light
+  Ogre::Light *light = _sceneMgr->createLight("MainLight");
+  light->setType(Ogre::Light::LT_DIRECTIONAL);
+  light->setDirection(Ogre::Vector3(0, -1, 0));
+
+
   // Creating the spaceship
   Ogre::Entity* ent_spaceship = _sceneMgr->createEntity("Spaceship", "Spaceship.mesh");
+  ent_spaceship->setCastShadows(true);
   Ogre::SceneNode* node_spaceship = _sceneMgr->createSceneNode("Spaceship");
   node_spaceship->attachObject(ent_spaceship);
-  node_spaceship->setPosition(0, 0, 5);
+  node_spaceship->setPosition(0, 1, 5);
   _sceneMgr->getRootSceneNode()->addChild(node_spaceship);
+
+  // Creating the ground
+  Ogre::Plane plane1(Ogre::Vector3::UNIT_Y, 0);
+  Ogre::MeshManager::getSingleton().createPlane("plane1", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+  plane1, 200, 200, 1, 1, true, 1, 20, 20, Ogre::Vector3::UNIT_Z);
+  Ogre::Entity* ground_ent = _sceneMgr->createEntity("planeEnt", "plane1");
+  ground_ent->setMaterialName("Sea.material");
+  Ogre::SceneNode* node_ground = _sceneMgr->createSceneNode("ground");
+  node_ground->attachObject(ground_ent);
+  _sceneMgr->getRootSceneNode()->addChild(node_ground);
+
 
   // Creating 3 enemies
   for (int i = 0; i < 3; i++) {
