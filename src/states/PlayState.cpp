@@ -23,8 +23,6 @@ PlayState::enter ()
 
   _player_shoots.clear();
   _enemy_shoots.clear();
-
-  createGreenShootMaterial();
 }
 
 void
@@ -292,15 +290,6 @@ void PlayState::checkEnemiesCollitions()
       }
     }
   }
-}
-
-void PlayState::createGreenShootMaterial()
-{
-  Ogre::MaterialPtr mPtr = Ogre::MaterialManager::getSingleton().create
-  ("green_shoot", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, true);
-  mPtr->setAmbient(Ogre::ColourValue(0.2, 0.6, 0.2)); //green
-  mPtr.getPointer()->getTechnique(0)->getPass(0)->setDiffuse(0.4, 0.4, 0.4, 0);
-  mPtr.getPointer()->getTechnique(0)->getPass(0)->setSpecular(0.4, 0.4, 0.4, 0);
 }
 
 void PlayState::movePlayer()
