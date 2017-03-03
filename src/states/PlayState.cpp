@@ -94,7 +94,7 @@ PlayState::keyReleased
 (const OIS::KeyEvent &e)
 {
   if (e.key == OIS::KC_ESCAPE || e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
-  if (e.key == OIS::KC_O) endGame(true, "Test", "150");
+  if (e.key == OIS::KC_O) endGame(true);
 
   if (e.key == OIS::KC_W) _moveUp = false;
   if (e.key == OIS::KC_S) _moveDown = false;
@@ -305,8 +305,8 @@ void PlayState::movePlayer()
   if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState();
 }
 
-void PlayState::endGame(bool win, std::string name, std::string points){
+void PlayState::endGame(bool win){
   EndState* endState = EndState::getSingletonPtr();
-  endState->setData(win, _game->getPlayerName(), std::to_string(_game->getPoints()));
+  endState->setData(win, _game->getPlayerName(), _game->getPoints());
   pushState(endState);
 }

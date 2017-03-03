@@ -116,10 +116,10 @@ void EndState::createGUI()
       _titleView->setText("Has perdido");
     }
     _nameView->setText(_name);
-    _pointsView->setText(_points);
+    _pointsView->setText(std::to_string(_points));
   } else{
     _nameView->setText(_name);
-    _pointsView->setText(_points);
+    _pointsView->setText(std::to_string(_points));
     _endGUI->show();
   }
 }
@@ -131,11 +131,11 @@ bool EndState::finish(const CEGUI::EventArgs &e)
   return true;
 }
 
-void EndState::setData(bool win, std::string name, std::string points)
+void EndState::setData(bool win, std::string name, int points)
 {
   _win = win;
   _name = name;
   _points = points;
   _rankingManager = new RankingManager();
-  //_rankingManager->setRanking(name, points);
+  _rankingManager->setRanking(name, points);
 }

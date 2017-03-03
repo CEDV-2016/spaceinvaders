@@ -36,7 +36,7 @@ public:
 
   bool finish(const CEGUI::EventArgs &e);
 
-  void setData(bool win, std::string name, std::string points);
+  void setData(bool win, std::string name, int points);
 
 protected:
   Ogre::Root* _root;
@@ -44,7 +44,8 @@ protected:
   Ogre::Viewport* _viewport;
   Ogre::Camera* _camera;
   CEGUI::Window* _endGUI, *_titleView, *_nameView, *_pointsView;
-  std::string _name, _points;
+  std::string _name;
+  int _points;
   bool _win;
   RankingManager* _rankingManager;
 

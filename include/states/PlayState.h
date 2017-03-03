@@ -52,7 +52,7 @@ public:
   void checkCollitions();
   void checkPlayerCollitions();
   void checkEnemiesCollitions();
-  void endGame(bool win, std::string name, std::string points);
+  void endGame(bool win);
 
 protected:
   Ogre::Root* _root;
