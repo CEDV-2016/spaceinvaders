@@ -22,16 +22,19 @@ IntroState::enter ()
   // Creating and placing camera
   _camera->setPosition(Ogre::Vector3(0, 20, 15)); //X Z -Y
   _camera->lookAt(Ogre::Vector3::ZERO);
-  _camera->setNearClipDistance(0.11);
+  _camera->setNearClipDistance(1);
   _camera->setFarClipDistance(1000);
-  _camera->setFOVy(Ogre::Degree(40));
+  _camera->setFOVy(Ogre::Degree(38));
   double width = _viewport->getActualWidth();
   double height = _viewport->getActualHeight();
   _camera->setAspectRatio(width / height);
 
   /* And there was light! */
-  _sceneMgr->setAmbientLight(Ogre::ColourValue(1, 1, 1));
-  _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.5,0.5,0.5));
+  // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+  _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+  _sceneMgr->setShadowTextureCount(30);
+  _sceneMgr->setShadowTextureSize(512);
 
   createScene();
   createGUI();
@@ -85,9 +88,11 @@ void
 IntroState::keyReleased
 (const OIS::KeyEvent &e )
 {
-  if (e.key == OIS::KC_ESCAPE) {
+  if (e.key == OIS::KC_ESCAPE)
+  {
     _exitGame = true;
-  }else if (e.key == OIS::KC_SPACE) {
+  }else if (e.key == OIS::KC_SPACE)
+  {
     pushState(MainState::getSingletonPtr());
   }
 }

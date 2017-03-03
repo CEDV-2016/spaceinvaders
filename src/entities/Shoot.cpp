@@ -8,7 +8,7 @@ Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
   Ogre::Entity * ent_shoot = _sceneMgr->createEntity("Shoot.mesh");
 
   if (_shooter == ENEMY_SHOOT) {
-    ent_shoot->getSubEntity(0)->setMaterialName("green_shoot");
+    ent_shoot->setMaterialName("EnemyShoot.material");
   }
 
   _node = _sceneMgr->createSceneNode();
@@ -19,36 +19,62 @@ Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
 
 Shoot::~Shoot() { }
 
-void Shoot::updatePosition()
+bool Shoot::updatePosition()
 {
-  if (_valid)
+  if (_valid && _node)
   {
     switch(_shooter)
     {
       case PLAYER_SHOOT:
-      if (_node->getPosition().z < -35) {
-        _valid = false;
-        _sceneMgr->destroySceneNode(_node);
+      if (_node->getPosition().z < -35)
+      {
+        destroyShoot();
       }
-      else _node->translate(0, 0, -0.04); //move up
+      else
+      {
+        _node->translate(0, 0, -0.04); //move up
+      }
       break;
 
       case ENEMY_SHOOT:
-      if (_node->getPosition().z > 30) {
-        _valid = false;
-        _sceneMgr->destroySceneNode(_node);
+      if (_node->getPosition().z > 30)
+      {
+        destroyShoot();
       }
-      else _node->translate(0, 0, 0.04); //move down
+      else
+      {
+        _node->translate(0, 0, 0.04); //move down
+      }
       break;
     }
   }
+  return _valid;
 }
+
+
+void Shoot::destroyShoot()
+{
+  _valid = false;
+  if (_node) _sceneMgr->destroySceneNode(_node);
+}
+
 
 bool Shoot::checkCollition(Ogre::SceneNode * node)
 {
-  if (_valid)
+  float x_margin = 0.5, z_margin = 0.35;
+  if (_valid && _node)
   {
-     return false;
+    Ogre::Vector3 spaceship_position = node->getPosition();
+    Ogre::Vector3 my_position = _node->getPosition();
+
+    if ( fabs( my_position.z - spaceship_position.z ) <= z_margin ) //checks Z axis
+    {
+      if ( fabs( my_position.x - spaceship_position.x ) <= x_margin ) //checks X axis
+      {
+        destroyShoot();
+        return true;
+      }
+    }
   }
-  else return false;
+  return false;
 }

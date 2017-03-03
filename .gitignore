@@ -4,3 +4,4 @@ obj/*
 *~
 *.log
 blender/*.blend1
+core

@@ -4,6 +4,7 @@
 #include <OIS/OIS.h>
 #include <CEGUI.h>
 #include <RendererModules/Ogre/Renderer.h>
+#include <math.h>       /* fabs */
 
 #define PLAYER_SHOOT 1
 #define ENEMY_SHOOT  2
@@ -14,11 +15,11 @@ public:
   Shoot(int shooter, Ogre::Vector3 coord, Ogre::SceneManager* sceneMgr);
   ~Shoot();
   bool checkCollition(Ogre::SceneNode * node);
-  void updatePosition();
+  bool updatePosition();
 
 private:
+  void destroyShoot();
   bool _valid = true;
-  Ogre::Vector3 _position;
   Ogre::SceneNode * _node;
   Ogre::SceneManager * _sceneMgr;
   int _shooter;
