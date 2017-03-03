@@ -5,6 +5,7 @@
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
 PlayState::PlayState(){
+  _game = new Game();
   _playGUI = NULL;
 }
 
@@ -16,7 +17,7 @@ PlayState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   createScene();
-  //createGUI();
+  createGUI();
 
   _exitGame = false;
   _moveUp = _moveDown = _moveRight = _moveLeft = false;
@@ -153,14 +154,24 @@ void PlayState::createGUI()
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_playGUI);
 
     //Config Buttons
+    CEGUI::Window* _layout = _playGUI->getChild("FrameWindow");
+    _nameView = _layout->getChild("NameLabel");
+    _scoreView = _layout->getChild("ScoreLabel");
+    _life1View = _layout->getChild("Live1");
+    _life2View = _layout->getChild("Live2");
+    _life3View = _layout->getChild("Live3");
 
+    //Set values
+    _nameView->setText(_game->getPlayerName());
   } else{
+    _nameView->setText(_game->getPlayerName());
     _playGUI->show();
   }
 }
 
 void PlayState::setPlayerName(std::string name)
 {
+  _game->setPlayerName(name);
 }
 
 void PlayState::addPlayerShoot(Ogre::Vector3 position)
@@ -226,6 +237,6 @@ void PlayState::movePlayer()
 
 void PlayState::endGame(bool win, std::string name, std::string points){
   EndState* endState = EndState::getSingletonPtr();
-  endState->setData(true, "Test", "150");//game->getPlayerName(), std::to_string(_game->getPoints()));
+  endState->setData(win, _game->getPlayerName(), std::to_string(_game->getPoints()));
   pushState(endState);
 }

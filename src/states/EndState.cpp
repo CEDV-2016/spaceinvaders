@@ -137,5 +137,5 @@ void EndState::setData(bool win, std::string name, std::string points)
   _name = name;
   _points = points;
   _rankingManager = new RankingManager();
-  _rankingManager->setRanking(name, 150);//_game->getPlayerName(), _game->getPoints());
+  //_rankingManager->setRanking(name, points);
 }

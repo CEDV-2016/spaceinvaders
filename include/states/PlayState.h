@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 
+#include "Game.h"
 #include "GameState.h"
 #include "Enemy.h"
 #include "Shoot.h"
@@ -61,7 +62,9 @@ protected:
   OIS::InputManager* _inputManager;
   OIS::Keyboard* _keyboard;
   OIS::Mouse* _mouse;
-  CEGUI::Window* _playGUI;
+  CEGUI::Window* _playGUI, *_nameView, *_scoreView, *_life1View, *_life2View, *_life3View;
+  Game *_game;
+  std::string _name;
 
   bool _exitGame;
 
