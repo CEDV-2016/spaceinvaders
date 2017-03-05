@@ -16,7 +16,7 @@ public:
   ~Player();
   Ogre::Vector3 getPosition();
   Ogre::SceneNode * getSceneNode();
-  void create(Ogre::SceneManager * sceneMgr);
+  void create(std::string color, Ogre::SceneManager * sceneMgr);
   void moveForward();
   void moveBackward();
   void moveRight();

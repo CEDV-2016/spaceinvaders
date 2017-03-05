@@ -18,11 +18,12 @@ Ogre::SceneNode * Player::getSceneNode()
   return _node;
 }
 
-void Player::create(Ogre::SceneManager * sceneMgr)
+void Player::create(std::string color, Ogre::SceneManager * sceneMgr)
 {
   _sceneMgr = sceneMgr;
 
   Ogre::Entity * entity = _sceneMgr->createEntity("Spaceship.mesh");
+  entity->setMaterialName(color);
   entity->setCastShadows(true);
   _node = _sceneMgr->createSceneNode("Spaceship");
   _node->attachObject(entity);
@@ -110,6 +111,6 @@ void Player::moveToInitialState()
 void Player::setOrientation()
 {
   _node->setOrientation(Ogre::Quaternion( Ogre::Degree(_pitch), Ogre::Vector3::UNIT_X) *
-  Ogre::Quaternion( Ogre::Degree(0),      Ogre::Vector3::UNIT_Y) *
-  Ogre::Quaternion( Ogre::Degree(_roll),  Ogre::Vector3::UNIT_Z) );
+                        Ogre::Quaternion( Ogre::Degree(0),      Ogre::Vector3::UNIT_Y) *
+                        Ogre::Quaternion( Ogre::Degree(_roll),  Ogre::Vector3::UNIT_Z) );
 }

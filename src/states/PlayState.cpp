@@ -7,6 +7,8 @@ template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 PlayState::PlayState(){
   _game = new Game();
   _playGUI = NULL;
+  _player_color = "Red";
+
 }
 
 void
@@ -63,8 +65,6 @@ PlayState::frameStarted
   // Checks whether a collition between spaceships and shoots has occurred
   checkCollitions();
 
-  _evenFrame = !_evenFrame;
-
   return true;
 }
 
@@ -101,9 +101,7 @@ PlayState::keyReleased
   if (e.key == OIS::KC_A) _moveLeft = false;
   if (e.key == OIS::KC_D) _moveRight = false;
 
-  if (e.key == OIS::KC_SPACE) {
-    addPlayerShoot(_player.getPosition() );
-  }
+  if (e.key == OIS::KC_SPACE) addPlayerShoot( _player.getPosition() );
 }
 
 void
@@ -137,15 +135,12 @@ PlayState::getSingleton ()
   return *msSingleton;
 }
 
-void PlayState::createScene() {
+void PlayState::createScene()
+{
   // Creating light
   Ogre::Light *light = _sceneMgr->createLight("MainLight");
   light->setType(Ogre::Light::LT_DIRECTIONAL);
   light->setDirection(Ogre::Vector3(0, -1, 0));
-
-
-  // Creating the spaceship
-  _player.create(_sceneMgr);
 
   // Creating the ground
   Ogre::Plane plane1(Ogre::Vector3::UNIT_Y, 0);
@@ -157,11 +152,13 @@ void PlayState::createScene() {
   node_ground->attachObject(ground_ent);
   _sceneMgr->getRootSceneNode()->addChild(node_ground);
 
+  // Creating the spaceship
+  _player.create(_player_color, _sceneMgr);
 
-  // Creating 3 enemies
-  for (int i = 0; i < 3; i++) {
-    Enemy aux(_sceneMgr);
-    _enemies.push_back(aux);
+  // Creating several enemies
+  for (int i = 0; i < Game::INITIAL_ENEMIES; i++)
+  {
+    createEnemy();
   }
 }
 
@@ -182,7 +179,8 @@ void PlayState::createGUI()
 
     //Set values
     _nameView->setText(_game->getPlayerName());
-  } else{
+  } else
+  {
     _nameView->setText(_game->getPlayerName());
     _playGUI->show();
   }
@@ -208,7 +206,8 @@ void PlayState::addEnemyShoot(Ogre::Vector3 position)
 void PlayState::updateEnemies()
 {
   Ogre::Vector3 position;
-  for (std::size_t i = 0; i < _enemies.size(); i++) {
+  for (std::size_t i = 0; i < _enemies.size(); i++)
+  {
     _enemies[i].updatePosition();
 
     if (_enemies[i].shoot())
@@ -222,7 +221,8 @@ void PlayState::updateEnemies()
 void PlayState::updateShoots()
 {
   bool valid;
-  for (std::size_t i = 0; i < _player_shoots.size(); i++) {
+  for (std::size_t i = 0; i < _player_shoots.size(); i++)
+  {
     valid = _player_shoots[i].updatePosition();
 
     if (!valid) // if it goes out of the screen will be deleted
@@ -232,7 +232,8 @@ void PlayState::updateShoots()
     }
   }
 
-  for (std::size_t i = 0; i < _enemy_shoots.size(); i++) {
+  for (std::size_t i = 0; i < _enemy_shoots.size(); i++)
+  {
     valid = _enemy_shoots[i].updatePosition();
 
     if (!valid)
@@ -246,6 +247,8 @@ void PlayState::updateShoots()
 // On even frames checking player collitions and on odd ones enemies collitions
 void PlayState::checkCollitions()
 {
+  _evenFrame = !_evenFrame;
+
   if (_evenFrame)
   {
     checkPlayerCollitions();
@@ -261,12 +264,13 @@ void PlayState::checkPlayerCollitions()
   Ogre::SceneNode* node_spaceship = _player.getSceneNode();
   bool collition;
 
-  for (std::size_t i = 0; i < _enemy_shoots.size(); i++) { //for each enemy shoot
-
+  for (std::size_t i = 0; i < _enemy_shoots.size(); i++) //for each enemy shoot
+  {
     collition = _enemy_shoots[i].checkCollition(node_spaceship);
 
-    if (collition) // deleting shoot and decreasing players health
+    if (collition)
     {
+      // Deleting that shoot from its vector and decreasing players' health
       _enemy_shoots.erase(_enemy_shoots.begin() + i);
       i--;
       std::cout << "COLLITION DETECTED (player & enemy shoot)" << "\n";
@@ -278,19 +282,36 @@ void PlayState::checkEnemiesCollitions()
 {
   bool collition;
 
-  for (std::size_t i = 0; i < _player_shoots.size(); i++) { //for each player shoot
-
-    for (std::size_t j = 0; j < _enemies.size(); j++) { //for each enemy
-
+  for (std::size_t i = 0; i < _player_shoots.size(); i++)  //for each player shoot
+  {
+    for (std::size_t j = 0; j < _enemies.size(); j++)  //for each enemy
+    {
       collition = _player_shoots[i].checkCollition(_enemies[j].getSceneNode());
 
       if (collition) // deleting shoot and enemy
       {
+        std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+
+        // Delete the destroyed enemy from the scene manager and from the game
+        _sceneMgr->destroySceneNode(_enemies[j].getSceneNode());
+        _game->destroyEnemy();
+
+        // Delete shoot and enemy from its respective vectors
         _player_shoots.erase(_player_shoots.begin() + i);
         i--;
         _enemies.erase(_enemies.begin() + j);
         j--;
-        std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+
+        // Keep playing if there are enemies left
+        if (_game->enemiesLeft())
+        {
+          createEnemy();
+        }
+        else if ( _enemies.size() == 0 ) // If every enemy has been destroyed
+        {
+          // YOU WON!!
+          std::cout << "WON! Points: " << _game->getPoints() << "\n";
+        }
       }
     }
   }
@@ -303,6 +324,13 @@ void PlayState::movePlayer()
   if (_moveLeft)  _player.moveLeft();
   if (_moveRight) _player.moveRight();
   if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState();
+}
+
+void PlayState::createEnemy()
+{
+  Enemy aux(_sceneMgr);
+  _enemies.push_back(aux);
+  _game->createEnemy();
 }
 
 void PlayState::endGame(bool win){

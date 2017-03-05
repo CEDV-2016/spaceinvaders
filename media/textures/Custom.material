@@ -11,7 +11,7 @@ material Sea.material
 			texture_unit
 			{
 				texture sea.jpg
-				scroll_anim 0 -0.6
+				scroll_anim 0.1 -0.6
 			}
 		}
 	}
@@ -29,7 +29,7 @@ material EnemyShoot.material
 
 			texture_unit
 			 {
-				 colour_op_ex source1 src_manual src_current 0.1 0.8 0.1
+				 colour_op_ex source1 src_manual src_current 0.8 0.1 0.1
 			 }
 		}
 	}

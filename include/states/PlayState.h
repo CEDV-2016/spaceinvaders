@@ -35,7 +35,7 @@ public:
   bool frameStarted (const Ogre::FrameEvent& evt);
   bool frameEnded (const Ogre::FrameEvent& evt);
 
-  // Heredados de Ogre::Singleton.
+  // Inherited from Ogre::Singleton.
   static PlayState& getSingleton ();
   static PlayState* getSingletonPtr ();
 
@@ -44,14 +44,6 @@ public:
 
   void setPlayerName(std::string name);
 
-  void movePlayer();
-  void addPlayerShoot(Ogre::Vector3 position);
-  void addEnemyShoot(Ogre::Vector3 position);
-  void updateEnemies();
-  void updateShoots();
-  void checkCollitions();
-  void checkPlayerCollitions();
-  void checkEnemiesCollitions();
   void endGame(bool win);
 
 protected:
@@ -76,6 +68,18 @@ protected:
   std::vector<Shoot> _player_shoots, _enemy_shoots;
   std::vector<Enemy> _enemies;
   Player _player;
+  std::string _player_color;
+
+
+  void movePlayer();
+  void addPlayerShoot(Ogre::Vector3 position);
+  void addEnemyShoot(Ogre::Vector3 position);
+  void updateEnemies();
+  void updateShoots();
+  void checkCollitions();
+  void checkPlayerCollitions();
+  void checkEnemiesCollitions();
+  void createEnemy();
 };
 
 #endif
