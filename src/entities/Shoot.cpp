@@ -61,7 +61,7 @@ void Shoot::destroyShoot()
 
 bool Shoot::checkCollition(Ogre::SceneNode * node)
 {
-  float x_margin = 0.5, z_margin = 0.35;
+  float x_margin = 1.15, z_margin = 0.45;
   if (_valid && _node)
   {
     Ogre::Vector3 spaceship_position = node->getPosition();

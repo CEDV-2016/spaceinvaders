@@ -31,7 +31,7 @@ void Enemy::updatePosition()
 
 bool Enemy::shoot()
 {
-  int min = 0, max = 1000, probability = 2;
+  int min = 0, max = 10000, probability = 30;
 
   int randNum = rand()%(max-min + 1) + min;
 

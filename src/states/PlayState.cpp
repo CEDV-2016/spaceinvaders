@@ -4,11 +4,11 @@
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
-PlayState::PlayState(){
+PlayState::PlayState()
+{
   _game = new Game();
   _playGUI = NULL;
-  _player_color = "Red";
-
+  _player_color = "Red"; //"Red" or "Blue"
 }
 
 void
@@ -26,6 +26,8 @@ PlayState::enter ()
 
   _player_shoots.clear();
   _enemy_shoots.clear();
+  _game->restart();
+  _scoreView->setText("Score: " + std::to_string(_game->getPoints()));
 }
 
 void
@@ -94,7 +96,6 @@ PlayState::keyReleased
 (const OIS::KeyEvent &e)
 {
   if (e.key == OIS::KC_ESCAPE || e.key == OIS::KC_P) pushState(PauseState::getSingletonPtr());
-  if (e.key == OIS::KC_O) endGame(true);
 
   if (e.key == OIS::KC_W) _moveUp = false;
   if (e.key == OIS::KC_S) _moveDown = false;
@@ -216,6 +217,21 @@ void PlayState::updateEnemies()
       addEnemyShoot(position);
     }
   }
+
+  if (_phase == BOSS)
+  {
+    _boss.updatePosition();
+    if (_boss.shoot()) //one shoot per cannon
+    {
+      position = _boss.getPosition();
+      position += Ogre::Vector3(2.2, 0, 1.5);
+      addEnemyShoot(position);
+
+      position = _boss.getPosition();
+      position -= Ogre::Vector3(2.2, 0, 1.5);
+      addEnemyShoot(position);
+    }
+  }
 }
 
 void PlayState::updateShoots()
@@ -276,6 +292,11 @@ void PlayState::checkPlayerCollitions()
       _player.receiveShoot();
 
       std::cout << "COLLITION DETECTED (player & enemy shoot). " << _player.getLifes() << " lifes remaining\n";
+
+      if (_player.getLifes() <= 0)
+      {
+        endGame(false);
+      }
     }
   }
 }
@@ -284,35 +305,59 @@ void PlayState::checkEnemiesCollitions()
 {
   bool collition;
 
-  for (std::size_t i = 0; i < _player_shoots.size(); i++)  //for each player shoot
+  if (_phase == ENEMIES)
   {
-    for (std::size_t j = 0; j < _enemies.size(); j++)  //for each enemy
+    for (std::size_t i = 0; i < _player_shoots.size(); i++)  //for each player shoot
     {
-      collition = _player_shoots[i].checkCollition(_enemies[j].getSceneNode());
-
-      if (collition) // deleting shoot and enemy
+      for (std::size_t j = 0; j < _enemies.size(); j++)  //for each enemy
       {
-        std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+        collition = _player_shoots[i].checkCollition(_enemies[j].getSceneNode());
 
-        // Delete the destroyed enemy from the scene manager and from the game
-        _sceneMgr->destroySceneNode(_enemies[j].getSceneNode());
-        _game->destroyEnemy();
-
-        // Delete shoot and enemy from its respective vectors
-        _player_shoots.erase(_player_shoots.begin() + i);
-        i--;
-        _enemies.erase(_enemies.begin() + j);
-        j--;
-
-        // Keep playing if there are enemies left
-        if (_game->enemiesLeft())
+        if (collition) // deleting shoot and enemy
         {
-          createEnemy();
+          std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+
+          // Delete the destroyed enemy from the scene manager and from the game
+          _sceneMgr->destroySceneNode(_enemies[j].getSceneNode());
+          _game->destroyEnemy();
+          _scoreView->setText("Score: " + std::to_string(_game->getPoints()));
+
+          // Delete shoot and enemy from its respective vectors
+          _player_shoots.erase(_player_shoots.begin() + i);
+          i--;
+          _enemies.erase(_enemies.begin() + j);
+          j--;
+
+          // Keep playing if there are enemies left
+          if ( _game->enemiesLeft() )
+          {
+            createEnemy();
+          }
+          else if ( _enemies.size() == 0 ) // If every enemy has been destroyed
+          {
+            // Oh! The boss appeared
+            _boss.create(_sceneMgr);
+            _phase = BOSS;
+          }
         }
-        else if ( _enemies.size() == 0 ) // If every enemy has been destroyed
+      }
+    }
+  }
+  else if (_phase == BOSS)
+  {
+    for (std::size_t i = 0; i < _player_shoots.size(); i++)  //for each player shoot
+    {
+      collition = _player_shoots[i].checkCollition( _boss.getSceneNode());
+
+      if (collition)
+      {
+        _boss.receiveShoot();
+
+        if (! _boss.isAlive() ) //if the boss is not alive...
         {
-          // YOU WON!!
-          std::cout << "WON! Points: " << _game->getPoints() << "\n";
+          for (int i = 0; i < 5; i++) _game->destroyEnemy(); //givin more points to player
+          _scoreView->setText("Score: " + std::to_string(_game->getPoints()));
+          endGame(true);
         }
       }
     }
@@ -336,6 +381,7 @@ void PlayState::createEnemy()
 }
 
 void PlayState::endGame(bool win){
+  _phase = ENEMIES;
   EndState* endState = EndState::getSingletonPtr();
   endState->setData(win, _game->getPlayerName(), _game->getPoints());
   pushState(endState);

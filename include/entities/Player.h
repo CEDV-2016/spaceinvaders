@@ -26,7 +26,7 @@ public:
   void setOrientation();
   void receiveShoot();
   int getLifes();
-  
+
 private:
   Ogre::Vector3 _position;
   Ogre::SceneNode * _node;

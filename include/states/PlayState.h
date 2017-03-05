@@ -13,7 +13,11 @@
 #include "GameState.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Boss.h"
 #include "Shoot.h"
+
+#define ENEMIES 0
+#define BOSS    1
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -68,8 +72,9 @@ protected:
   std::vector<Shoot> _player_shoots, _enemy_shoots;
   std::vector<Enemy> _enemies;
   Player _player;
+  Boss _boss;
   std::string _player_color;
-
+  int _phase = ENEMIES;
 
   void movePlayer();
   void addPlayerShoot(Ogre::Vector3 position);

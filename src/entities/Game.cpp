@@ -1,11 +1,11 @@
 #include "Game.h"
-
+ 
 Game::Game() {
   _points = 0;
   _enemies_left = NUMBER_ENEMIES;
 }
 
-Game::~Game () {}
+Game::~Game() {}
 
 void Game::setPlayerName(std::string name)
 {
@@ -25,6 +25,7 @@ int Game::getPoints()
 void Game::restart()
 {
   _points = 0;
+  _enemies_left = NUMBER_ENEMIES;
 }
 
 void Game::createEnemy()

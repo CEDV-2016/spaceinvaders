@@ -22,7 +22,7 @@ Ogre::SceneNode * Player::getSceneNode()
 void Player::create(std::string color, Ogre::SceneManager * sceneMgr)
 {
   _sceneMgr = sceneMgr;
-
+  
   Ogre::Entity * entity = _sceneMgr->createEntity("Spaceship.mesh");
   entity->setMaterialName(color);
   entity->setCastShadows(true);
@@ -34,50 +34,61 @@ void Player::create(std::string color, Ogre::SceneManager * sceneMgr)
 
 void Player::moveForward()
 {
-  _position += Ogre::Vector3(0, 0, -0.05);
-  _node->setPosition( _position );
-
-  if ( _pitch > -MAX_PITCH)
+  if (_position.z < 15)
   {
-    _pitch -= TURN_DEGREE;
-    setOrientation();
+    _position += Ogre::Vector3(0, 0, -0.05);
+    _node->setPosition( _position );
+
+    if ( _pitch > -MAX_PITCH)
+    {
+      _pitch -= TURN_DEGREE;
+      setOrientation();
+    }
   }
 }
 
 void Player::moveBackward()
 {
-  _position += Ogre::Vector3(0, 0, 0.05);
-  _node->setPosition( _position );
-
-  if ( _pitch < MAX_PITCH)
+  if (_position.z > -15)
   {
-    _pitch += TURN_DEGREE;
-    setOrientation();
+    _position += Ogre::Vector3(0, 0, 0.05);
+    _node->setPosition( _position );
+
+    if ( _pitch < MAX_PITCH)
+    {
+      _pitch += TURN_DEGREE;
+      setOrientation();
+    }
   }
 }
 
 void Player::moveRight()
 {
-  _position += Ogre::Vector3(0.05, 0, 0);
-  _node->setPosition( _position );
-
-  if ( _roll > -MAX_ROLL)
+  if (_position.x < 15)
   {
-    _roll -= TURN_DEGREE;
-    setOrientation();
-  }
+    _position += Ogre::Vector3(0.05, 0, 0);
+    _node->setPosition( _position );
 
+    if ( _roll > -MAX_ROLL)
+    {
+      _roll -= TURN_DEGREE;
+      setOrientation();
+    }
+  }
 }
 
 void Player::moveLeft()
 {
-  _position += Ogre::Vector3(-0.05, 0, 0);
-  _node->setPosition( _position );
-
-  if ( _roll < MAX_ROLL)
+  if (_position.x > -15)
   {
-    _roll += TURN_DEGREE;
-    setOrientation();
+    _position += Ogre::Vector3(-0.05, 0, 0);
+    _node->setPosition( _position );
+
+    if ( _roll < MAX_ROLL)
+    {
+      _roll += TURN_DEGREE;
+      setOrientation();
+    }
   }
 }
 
@@ -112,8 +123,8 @@ void Player::moveToInitialState()
 void Player::setOrientation()
 {
   _node->setOrientation(Ogre::Quaternion( Ogre::Degree(_pitch), Ogre::Vector3::UNIT_X) *
-                        Ogre::Quaternion( Ogre::Degree(0),      Ogre::Vector3::UNIT_Y) *
-                        Ogre::Quaternion( Ogre::Degree(_roll),  Ogre::Vector3::UNIT_Z) );
+  Ogre::Quaternion( Ogre::Degree(0),      Ogre::Vector3::UNIT_Y) *
+  Ogre::Quaternion( Ogre::Degree(_roll),  Ogre::Vector3::UNIT_Z) );
 }
 
 void Player::receiveShoot()
