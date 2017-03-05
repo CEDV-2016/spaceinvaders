@@ -35,7 +35,7 @@ void Boss::updatePosition()
       {
         _position += Ogre::Vector3(-0.015, 0, 0);
 
-        if (_roll < MAX_ROLL) _roll += TURN_DEGREE;
+        if (_roll < MAX_ROLL_BOSS) _roll += TURN_DEGREE_BOSS;
       }
       else // the boss has reached left limit move right
       {
@@ -48,7 +48,7 @@ void Boss::updatePosition()
       {
         _position += Ogre::Vector3(0.01, 0, 0);
 
-        if (_roll > -MAX_ROLL) _roll -= TURN_DEGREE;
+        if (_roll > -MAX_ROLL_BOSS) _roll -= TURN_DEGREE_BOSS;
       }
       else //the boss has reached the right limit of the screen
       {

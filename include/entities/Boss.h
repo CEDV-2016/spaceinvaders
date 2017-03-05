@@ -5,8 +5,8 @@
 #define RIGHT 0
 #define LEFT  1
 #define BOSS_LIFE  20
-#define MAX_ROLL 10
-#define TURN_DEGREE 0.05
+#define MAX_ROLL_BOSS 10
+#define TURN_DEGREE_BOSS 0.05
 
 class Boss
 {

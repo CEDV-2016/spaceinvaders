@@ -55,14 +55,16 @@ bool
 PlayState::frameStarted
 (const Ogre::FrameEvent& evt)
 {
+  Ogre::Real deltaT = evt.timeSinceLastFrame;
+  deltaT *= 350.0;
   // Moves the player basing on the pressed keys
-  movePlayer();
+  movePlayer(deltaT);
 
   // Updates the enemies' position and makes them shoot
-  updateEnemies();
+  updateEnemies(deltaT);
 
   // Updates the position of all shoots
-  updateShoots();
+  updateShoots(deltaT);
 
   // Checks whether a collition between spaceships and shoots has occurred
   checkCollitions();
@@ -204,12 +206,12 @@ void PlayState::addEnemyShoot(Ogre::Vector3 position)
   _enemy_shoots.push_back(shoot);
 }
 
-void PlayState::updateEnemies()
+void PlayState::updateEnemies(Ogre::Real deltaT)
 {
   Ogre::Vector3 position;
   for (std::size_t i = 0; i < _enemies.size(); i++)
   {
-    _enemies[i].updatePosition();
+    _enemies[i].updatePosition(deltaT);
 
     if (_enemies[i].shoot())
     {
@@ -234,7 +236,7 @@ void PlayState::updateEnemies()
   }
 }
 
-void PlayState::updateShoots()
+void PlayState::updateShoots(Ogre::Real deltaT)
 {
   bool valid;
   for (std::size_t i = 0; i < _player_shoots.size(); i++)
@@ -364,7 +366,7 @@ void PlayState::checkEnemiesCollitions()
   }
 }
 
-void PlayState::movePlayer()
+void PlayState::movePlayer(Ogre::Real deltaT)
 {
   if (_moveUp)    _player.moveForward();
   if (_moveDown)  _player.moveBackward();

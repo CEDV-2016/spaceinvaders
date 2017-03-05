@@ -10,7 +10,7 @@ class Enemy
 public:
   Enemy(Ogre::SceneManager* sceneMgr);
   ~Enemy();
-  void updatePosition();
+  void updatePosition(Ogre::Real deltaT);
   bool shoot();
   Ogre::Vector3 getPosition();
   Ogre::SceneNode * getSceneNode();

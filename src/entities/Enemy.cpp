@@ -16,7 +16,7 @@ Enemy::Enemy(Ogre::SceneManager* sceneMgr)
 
 Enemy::~Enemy() { }
 
-void Enemy::updatePosition()
+void Enemy::updatePosition(Ogre::Real deltaT)
 {
   if (_position.z > 15)
   {
@@ -24,7 +24,7 @@ void Enemy::updatePosition()
   }
   else
   {
-    _position += Ogre::Vector3(0, 0, 0.02);
+    _position += Ogre::Vector3(0, 0, 0.02 * deltaT);
   }
   _node->setPosition(_position);
 }

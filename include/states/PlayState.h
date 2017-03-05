@@ -76,11 +76,11 @@ protected:
   std::string _player_color;
   int _phase = ENEMIES;
 
-  void movePlayer();
+  void movePlayer(Ogre::Real deltaT);
   void addPlayerShoot(Ogre::Vector3 position);
   void addEnemyShoot(Ogre::Vector3 position);
-  void updateEnemies();
-  void updateShoots();
+  void updateEnemies(Ogre::Real deltaT);
+  void updateShoots(Ogre::Real deltaT);
   void checkCollitions();
   void checkPlayerCollitions();
   void checkEnemiesCollitions();
