@@ -273,7 +273,9 @@ void PlayState::checkPlayerCollitions()
       // Deleting that shoot from its vector and decreasing players' health
       _enemy_shoots.erase(_enemy_shoots.begin() + i);
       i--;
-      std::cout << "COLLITION DETECTED (player & enemy shoot)" << "\n";
+      _player.receiveShoot();
+
+      std::cout << "COLLITION DETECTED (player & enemy shoot). " << _player.getLifes() << " lifes remaining\n";
     }
   }
 }

@@ -1,0 +1,223 @@
+<scene export_time="1488717297.218276" exported_by="pedroma" formatVersion="1.0.1" previous_export_time="1488026221.3814423" >
+  <nodes >
+    <node name="Point.003" >
+      <position z="-2.862286" x="-4.533564" y="8.807403" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.003" >
+        <position z="-2.862286" x="-4.533564" y="8.807403" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Point" >
+      <position z="2.450561" x="2.057233" y="1.407785" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point" >
+        <position z="2.450561" x="2.057233" y="1.407785" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Lamp" >
+      <position z="-0.252181" x="1.190631" y="1.722978" />
+      <rotation qx="0.169076" qw="0.570948" qy="0.755880" qz="-0.272171" />
+      <scale z="0.290000" x="0.290000" y="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp" >
+        <position z="-0.252181" x="1.190631" y="1.722978" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+        <colourShadow b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Camera" >
+      <position z="-0.000000" x="0.000000" y="25.000000" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <camera fov="0.5033799435163735" name="Camera" projectionType="perspective" >
+        <clipping nearPlaneDist="0.10000000149011612" far="100.0" farPlaneDist="100.0" near="0.10000000149011612" />
+      </camera>
+    </node>
+    <node name="Sun" >
+      <position z="-0.000000" x="0.000000" y="0.000000" />
+      <rotation qx="0.000000" qw="-0.000000" qy="1.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <user_data type="IDPropertyGroup" name="cycles" value='&lt;bpy id prop: owner="OBSun", name="cycles", address=0x7fd49f0f8c48&gt;' />
+      <user_data type="IDPropertyGroup" name="cycles_visibility" value='&lt;bpy id prop: owner="OBSun", name="cycles_visibility", address=0x7fd49f0f8ce8&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="directional" name="Sun" >
+        <position z="-0.000000" x="0.000000" y="0.000000" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <direction z="0.0" x="-0.0" y="-1.0" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Lamp.001" >
+      <position z="-0.252181" x="-3.017929" y="1.722978" />
+      <rotation qx="0.169076" qw="0.570948" qy="0.755880" qz="-0.272171" />
+      <scale z="0.290000" x="0.290000" y="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp.001" >
+        <position z="-0.252181" x="-3.017929" y="1.722978" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+        <colourShadow b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Lamp.002" >
+      <position z="1.234211" x="0.449216" y="-1.772426" />
+      <rotation qx="0.169076" qw="0.570948" qy="0.755880" qz="-0.272171" />
+      <scale z="0.290000" x="0.290000" y="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp.002" >
+        <position z="1.234211" x="0.449216" y="-1.772426" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+        <colourShadow b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Point.001" >
+      <position z="1.860154" x="-2.079293" y="-2.066339" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.001" >
+        <position z="1.860154" x="-2.079293" y="-2.066339" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Point.002" >
+      <position z="-3.227009" x="-0.091037" y="1.407785" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.002" >
+        <position z="-3.227009" x="-0.091037" y="1.407785" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Lamp.003" >
+      <position z="-2.721850" x="1.427506" y="-0.158531" />
+      <rotation qx="0.169076" qw="0.570948" qy="0.755880" qz="-0.272171" />
+      <scale z="0.290000" x="0.290000" y="0.290000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" shadow="true" name="Lamp.003" >
+        <position z="-2.721850" x="1.427506" y="-0.158531" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+        <colourShadow b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Boss" >
+      <position z="-1.000000" x="0.000000" y="0.000000" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity velocity_max="0.0" physics_type="STATIC" meshFile="Boss.mesh" friction_x="1.0" lock_trans_x="False" ghost="False" lock_trans_y="False" friction_z="1.0" friction_y="1.0" lock_rot_z="False" velocity_min="0.0" actor="False" lock_rot_x="False" name="Boss" lock_trans_z="False" damping_rot="0.1589999943971634" lock_rot_y="False" anisotropic_friction="False" mass_radius="1.0" inertia_tensor="0.4000000059604645" mass="1.0" damping_trans="0.02539999969303608" />
+    </node>
+    <node name="Point.004" >
+      <position z="-2.862286" x="5.866839" y="8.807403" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.004" >
+        <position z="-2.862286" x="5.866839" y="8.807403" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Point.005" >
+      <position z="12.299845" x="-0.276358" y="9.499889" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.005" >
+        <position z="12.299845" x="-0.276358" y="9.499889" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Point.006" >
+      <position z="-4.335650" x="0.034508" y="8.807403" />
+      <rotation qx="0.000000" qw="1.000000" qy="0.000000" qz="-0.000000" />
+      <scale z="1.000000" x="1.000000" y="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light powerScale="1.0" type="point" name="Point.006" >
+        <position z="-4.335650" x="0.034508" y="8.807403" />
+        <lightAttenuation constant="1.0" linear="0.04" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/pedroma/CEDV/spaceinvaders/media/models/boss/Material.002.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

@@ -74,7 +74,7 @@ $(DIROBJ)%.o: $(DIRSRC_ENTITIES)%.cpp
 # Temporals cleaning -----------------------------------------------------------
 clean:
 	$(RM) -r *.log $(EXEC) *~ $(DIROBJ) $(DIRSRC)*~ $(DIRHEA)*~
-	@find . -name 'spaceship.scene' -exec rm -vf {} \;
+	@find . -name 'spaceships.scene' -exec rm -vf {} \;
 
 dir:
 	@mkdir -p obj/

@@ -8,6 +8,7 @@
 #define MAX_ROLL 45
 #define MAX_PITCH 35
 #define TURN_DEGREE 0.5
+#define INITIAL_LIFES 3
 
 class Player
 {
@@ -23,10 +24,13 @@ public:
   void moveLeft();
   void moveToInitialState();
   void setOrientation();
-
+  void receiveShoot();
+  int getLifes();
+  
 private:
   Ogre::Vector3 _position;
   Ogre::SceneNode * _node;
   Ogre::SceneManager * _sceneMgr;
   double _roll, _pitch;
+  int _lifes;
 };
