@@ -74,7 +74,6 @@ protected:
   std::vector<Enemy> _enemies;
   Player _player;
   Boss _boss;
-  std::string _player_color;
   int _phase = ENEMIES;
 
   void movePlayer(Ogre::Real deltaT);

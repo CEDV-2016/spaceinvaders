@@ -8,7 +8,6 @@ PlayState::PlayState()
 {
   _game = new Game();
   _playGUI = NULL;
-  _player_color = "Red"; //"Red" or "Blue"
 }
 
 void
@@ -156,7 +155,15 @@ void PlayState::createScene()
   _sceneMgr->getRootSceneNode()->addChild(node_ground);
 
   // Creating the spaceship
-  _player.create(_player_color, _sceneMgr);
+  std::cout << "--"<<_game->getPlayerName() << "--\n";
+  if (_game->getPlayerName() == "CEDV" || _game->getPlayerName() == "cedv") // an small easter egg :P
+  {
+    _player.create("Blue", _sceneMgr);
+  }
+  else
+  {
+    _player.create("Red", _sceneMgr);
+  }
 
   // Creating several enemies
   for (int i = 0; i < Game::INITIAL_ENEMIES; i++)
