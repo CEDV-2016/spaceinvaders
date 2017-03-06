@@ -6,7 +6,7 @@ Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
   _sceneMgr = sceneMgr;
   _shooter = shooter;
   _node = NULL;
-  
+
   Ogre::Entity * ent_shoot = _sceneMgr->createEntity("Shoot.mesh");
 
   if (_shooter == ENEMY_SHOOT)
@@ -77,9 +77,7 @@ bool Shoot::checkCollition(Ogre::SceneNode * node)
   {
     Ogre::Vector3 spaceship_position = node->getPosition();
 
-    Ogre::Vector3 my_position;
-    if (_node) my_position = _node->getPosition();
-    else return false;
+    Ogre::Vector3 my_position = _node->getPosition();
 
     if ( fabs( my_position.z - spaceship_position.z ) <= z_margin ) //checks Z axis
     {
