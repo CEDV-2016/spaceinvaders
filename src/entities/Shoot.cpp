@@ -55,7 +55,11 @@ bool Shoot::updatePosition(Ogre::Real deltaT)
 void Shoot::destroyShoot()
 {
   _valid = false;
-  if (_node) _sceneMgr->destroySceneNode(_node);
+  if (_node)
+  {
+    _sceneMgr->destroySceneNode(_node);
+    _node = NULL;
+  }
 }
 
 

@@ -245,7 +245,7 @@ void PlayState::updateEnemies(Ogre::Real deltaT)
   {
     bool continue_playing;
     continue_playing = _boss.updatePosition(deltaT);
-    
+
     if ( !continue_playing )
     {
       for (int i = 0; i < 5; i++) _game->destroyEnemy(); //givin more points to player
@@ -257,12 +257,9 @@ void PlayState::updateEnemies(Ogre::Real deltaT)
       if (_boss.shoot()) //one shoot per cannon
       {
         position = _boss.getPosition();
-        position += Ogre::Vector3(2.2, 0, 1.5);
-        addEnemyShoot(position);
+        addEnemyShoot(position + Ogre::Vector3(2, 1, 4));
 
-        position = _boss.getPosition();
-        position -= Ogre::Vector3(2.2, 0, 1.5);
-        addEnemyShoot(position);
+        addEnemyShoot(position + Ogre::Vector3(-2, 1, 4));
       }
     }
   }
@@ -325,7 +322,6 @@ void PlayState::checkPlayerCollitions(Ogre::Real deltaT)
       i--;
       _player.receiveShoot();
 
-      std::cout << "COLLITION DETECTED (player & enemy shoot). " << _player.getLifes() << " lifes remaining\n";
       updateGUI();
 
       if (_player.getLifes() <= 0)
@@ -350,7 +346,6 @@ void PlayState::checkEnemiesCollitions(Ogre::Real deltaT)
 
         if (collition) // deleting shoot and enemy
         {
-          // std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
 
           Enemy_part parts(_sceneMgr, _enemies[j].getPosition());
           _enemy_parts.push_back(parts);
