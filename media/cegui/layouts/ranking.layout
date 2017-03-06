@@ -23,9 +23,9 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="Point1" >
-            <Property name="Area" value="{{0,450},{0,-240},{0,632},{0,-120}}" />
+            <Property name="Area" value="{{0,450},{0,-240},{0,660},{0,-120}}" />
             <Property name="Font" value="Jura-40" />
-            <Property name="Text" value="100" />
+            <Property name="Text" value="500" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="HorzFormatting" value="RightAligned" />
             <Property name="VerticalAlignment" value="Centre" />
@@ -49,7 +49,7 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="Point2" >
-            <Property name="Area" value="{{0,450},{0,-120},{0,632},{0,0}}" />
+            <Property name="Area" value="{{0,450},{0,-120},{0,651},{0,0}}" />
             <Property name="Font" value="Jura-40" />
             <Property name="Text" value="90" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -75,7 +75,7 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="Point3" >
-            <Property name="Area" value="{{0,450},{0,0},{0,632},{0,120}}" />
+            <Property name="Area" value="{{0,450},{0,0},{0,660},{0,120}}" />
             <Property name="Font" value="Jura-40" />
             <Property name="Text" value="80" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -101,7 +101,7 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="Point4" >
-            <Property name="Area" value="{{0,450},{0,120},{0,632},{0,240}}" />
+            <Property name="Area" value="{{0,450},{0,120},{0,660},{0,240}}" />
             <Property name="Font" value="Jura-40" />
             <Property name="Text" value="70" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -127,7 +127,7 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="Point5" >
-            <Property name="Area" value="{{0,450},{0,240},{0,632},{0,360}}" />
+            <Property name="Area" value="{{0,450},{0,240},{0,660},{0,360}}" />
             <Property name="Font" value="Jura-40" />
             <Property name="Text" value="60" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
