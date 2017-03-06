@@ -8,8 +8,15 @@
 	<Font filename="Jura-13.font" />
 	<Font filename="Jura-18.font" />
 	<Font filename="Jura-25.font" />
+	<Font filename="Jura-30.font" />
+	<Font filename="Jura-35.font" />
+	<Font filename="Jura-40.font" />
+	<Font filename="Jura-45.font" />
 	<Font filename="Jura-50.font" />
 	<Font filename="Jura-100.font" />
+	<Font filename="Jura-110.font" />
+	<Font filename="Jura-120.font" />
+	<Font filename="Jura-130.font" />
 	<Font filename="Jura-150.font" />
 
 	<FalagardMapping windowType="Vanilla/Label" targetType="DefaultWindow" renderer="Core/Default" lookNFeel="Vanilla/Label" />

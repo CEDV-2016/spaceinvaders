@@ -1,10 +1,10 @@
 Jota
 230
+JJ
+180
+
+180
 Pedro
 100
 Luis
 90
-Concha
-80
-Marta
-70

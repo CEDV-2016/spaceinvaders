@@ -7,7 +7,7 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="AspectRatio" value="1.8" />
         <Window type="Vanilla/Label" name="Name" >
-            <Property name="Area" value="{{0,-44},{0,-128},{0,596},{0,-24}}" />
+            <Property name="Area" value="{{0,3},{0,-128},{0,737},{0,-24}}" />
             <Property name="Font" value="Jura-50" />
             <Property name="Text" value="Nombre:" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -16,21 +16,21 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Editbox" name="NameEditBox" >
-            <Property name="Area" value="{{0,0},{0,0},{0.317187,128},{0,104}}" />
+            <Property name="Area" value="{{0,26},{0,0},{0.317187,306},{0,104}}" />
             <Property name="Font" value="Jura-50" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="PlayButton" >
-            <Property name="Area" value="{{0,-40},{0,-40},{0,294},{0,64}}" />
-            <Property name="Font" value="Jura-50" />
+            <Property name="Area" value="{{0,-40},{0,-40},{0,350},{0,64}}" />
+            <Property name="Font" value="Jura-40" />
             <Property name="Text" value="Jugar" />
             <Property name="VerticalAlignment" value="Bottom" />
             <Property name="HorizontalAlignment" value="Right" />
         </Window>
         <Window type="Vanilla/Button" name="BackButton" >
-            <Property name="Area" value="{{0,40},{0,-40},{0,396},{0,64}}" />
-            <Property name="Font" value="Jura-50" />
+            <Property name="Area" value="{{0,40},{0,-40},{0,490},{0,64}}" />
+            <Property name="Font" value="Jura-40" />
             <Property name="Text" value="Volver" />
             <Property name="VerticalAlignment" value="Bottom" />
         </Window>
