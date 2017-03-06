@@ -4,7 +4,7 @@ Enemy::Enemy(Ogre::SceneManager* sceneMgr)
 {
   _sceneMgr = sceneMgr;
 
-  _position = Ogre::Vector3 ( getRandomXPosition(), 0, -20 );
+  _position = Ogre::Vector3 ( getRandomXPosition(), 0.5, -20 );
 
   Ogre::Entity * entity = _sceneMgr->createEntity("Enemy.mesh");
   entity->setCastShadows(true);
@@ -20,7 +20,7 @@ void Enemy::updatePosition(Ogre::Real deltaT)
 {
   if (_position.z > 15)
   {
-    _position = Ogre::Vector3 ( getRandomXPosition(), 0, -20 );
+    _position = Ogre::Vector3 ( getRandomXPosition(), 0.5, -20 );
   }
   else
   {
@@ -53,4 +53,9 @@ double Enemy::getRandomXPosition()
   int min_x = -100, max_x = 100;
   int rand_x = rand() % (max_x - min_x + 1) + min_x;
   return rand_x / 10;
+}
+
+void Enemy::destroy()
+{
+  _sceneMgr->destroySceneNode( _node );
 }

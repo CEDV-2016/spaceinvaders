@@ -2,7 +2,7 @@
 
 Player::Player() {}
 
-Player::~Player(){}
+Player::~Player() {}
 
 Ogre::Vector3 Player::getPosition()
 {

@@ -2,11 +2,11 @@
 
 Boss::Boss() {}
 
-Boss::~Boss() { }
+Boss::~Boss() {}
 
 void Boss::create(Ogre::SceneManager* sceneMgr)
 {
-  _position = Ogre::Vector3 ( 0, 0, -20 );
+  _position = Ogre::Vector3 ( 0, 0, -25 );
   _roll = 0;
   _sceneMgr = sceneMgr;
   _move_towards = MOVE_LEFT;

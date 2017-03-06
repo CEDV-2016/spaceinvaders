@@ -1,9 +1,6 @@
 #pragma once
 
 #include <Ogre.h>
-#include <OIS/OIS.h>
-#include <CEGUI.h>
-#include <RendererModules/Ogre/Renderer.h>
 
 #define MAX_ROLL 45
 #define MAX_PITCH 35

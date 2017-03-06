@@ -65,7 +65,10 @@ bool Shoot::checkCollition(Ogre::SceneNode * node)
   if (_valid && _node)
   {
     Ogre::Vector3 spaceship_position = node->getPosition();
-    Ogre::Vector3 my_position = _node->getPosition();
+
+    Ogre::Vector3 my_position;
+    if (_node) my_position = _node->getPosition();
+    else return false;
 
     if ( fabs( my_position.z - spaceship_position.z ) <= z_margin ) //checks Z axis
     {

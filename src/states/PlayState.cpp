@@ -38,6 +38,7 @@ PlayState::exit ()
   _enemies.clear();
   _enemy_shoots.clear();
   _player_shoots.clear();
+  _enemy_parts.clear();
 }
 
 void
@@ -66,7 +67,7 @@ PlayState::frameStarted
   updateShoots(deltaT);
 
   // Checks whether a collition between spaceships and shoots has occurred
-  checkCollitions();
+  checkCollitions(deltaT);
 
   return true;
 }
@@ -155,7 +156,6 @@ void PlayState::createScene()
   _sceneMgr->getRootSceneNode()->addChild(node_ground);
 
   // Creating the spaceship
-  std::cout << "--"<<_game->getPlayerName() << "--\n";
   if (_game->getPlayerName() == "CEDV" || _game->getPlayerName() == "cedv") // an small easter egg :P
   {
     _player.create("Blue", _sceneMgr);
@@ -199,14 +199,14 @@ void PlayState::createGUI()
 void PlayState::updateGUI() {
   switch (_player.getLifes()) {
     case 2:
-      _life3View->setVisible(false);
-      break;
+    _life3View->setVisible(false);
+    break;
     case 1:
-      _life2View->setVisible(false);
-      break;
+    _life2View->setVisible(false);
+    break;
     case 0:
-      _life1View->setVisible(false);
-      break;
+    _life1View->setVisible(false);
+    break;
   }
 }
 
@@ -284,21 +284,21 @@ void PlayState::updateShoots(Ogre::Real deltaT)
 }
 
 // On even frames checking player collitions and on odd ones enemies collitions
-void PlayState::checkCollitions()
+void PlayState::checkCollitions(Ogre::Real deltaT)
 {
   _evenFrame = !_evenFrame;
 
   if (_evenFrame)
   {
-    checkPlayerCollitions();
+    checkPlayerCollitions(deltaT);
   }
   else
   {
-    checkEnemiesCollitions();
+    checkEnemiesCollitions(deltaT);
   }
 }
 
-void PlayState::checkPlayerCollitions()
+void PlayState::checkPlayerCollitions(Ogre::Real deltaT)
 {
   Ogre::SceneNode* node_spaceship = _player.getSceneNode();
   bool collition;
@@ -325,7 +325,7 @@ void PlayState::checkPlayerCollitions()
   }
 }
 
-void PlayState::checkEnemiesCollitions()
+void PlayState::checkEnemiesCollitions(Ogre::Real deltaT)
 {
   bool collition;
 
@@ -341,8 +341,11 @@ void PlayState::checkEnemiesCollitions()
         {
           // std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
 
+          Enemy_part parts(_sceneMgr, _enemies[j].getPosition());
+          _enemy_parts.push_back(parts);
+
           // Delete the destroyed enemy from the scene manager and from the game
-          _sceneMgr->destroySceneNode(_enemies[j].getSceneNode());
+          _enemies[j].destroy();
           _game->destroyEnemy();
           _scoreView->setText("Score: " + std::to_string(_game->getPoints()));
 
@@ -384,6 +387,22 @@ void PlayState::checkEnemiesCollitions()
           endGame(true);
         }
       }
+    }
+  }
+  updateEnemyParts(deltaT);
+}
+
+void PlayState::updateEnemyParts(Ogre::Real deltaT)
+{
+  bool valid;
+  for (std::size_t i = 0; i < _enemy_parts.size(); i++)  //for each enemy part
+  {
+    valid = _enemy_parts[i].updatePosition(deltaT);
+
+    if ( !valid ) //if is below the ground
+    {
+      _enemy_parts.erase( _enemy_parts.begin() + i );
+      i--;
     }
   }
 }

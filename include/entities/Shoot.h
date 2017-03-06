@@ -1,9 +1,6 @@
 #pragma once
 
 #include <Ogre.h>
-#include <OIS/OIS.h>
-#include <CEGUI.h>
-#include <RendererModules/Ogre/Renderer.h>
 #include <math.h>       /* fabs */
 
 #define PLAYER_SHOOT 1

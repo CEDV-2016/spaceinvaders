@@ -13,6 +13,7 @@
 #include "GameState.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Enemy_part.h"
 #include "Boss.h"
 #include "Shoot.h"
 
@@ -72,6 +73,7 @@ protected:
   bool _moveRight, _moveLeft, _moveUp, _moveDown;
   std::vector<Shoot> _player_shoots, _enemy_shoots;
   std::vector<Enemy> _enemies;
+  std::vector<Enemy_part> _enemy_parts;
   Player _player;
   Boss _boss;
   int _phase = ENEMIES;
@@ -80,10 +82,11 @@ protected:
   void addPlayerShoot(Ogre::Vector3 position);
   void addEnemyShoot(Ogre::Vector3 position);
   void updateEnemies(Ogre::Real deltaT);
+  void updateEnemyParts(Ogre::Real deltaT);
   void updateShoots(Ogre::Real deltaT);
-  void checkCollitions();
-  void checkPlayerCollitions();
-  void checkEnemiesCollitions();
+  void checkCollitions(Ogre::Real deltaT);
+  void checkPlayerCollitions(Ogre::Real deltaT);
+  void checkEnemiesCollitions(Ogre::Real deltaT);
   void createEnemy();
 };
 

@@ -38,7 +38,7 @@ OBJS += $(subst $(DIRSRC_ENTITIES), $(DIROBJ), $(patsubst %.cpp, %.o, $(wildcard
 .PHONY: all clean
 
 all: dir $(EXEC)
-	./$(EXEC)
+	gdb -ex run ./$(EXEC)
 
 info:
 	@echo '------------------------------------------------------'

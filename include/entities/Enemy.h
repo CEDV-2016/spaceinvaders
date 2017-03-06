@@ -1,9 +1,6 @@
 #pragma once
 
 #include <Ogre.h>
-#include <OIS/OIS.h>
-#include <CEGUI.h>
-#include <RendererModules/Ogre/Renderer.h>
 
 class Enemy
 {
@@ -14,6 +11,7 @@ public:
   bool shoot();
   Ogre::Vector3 getPosition();
   Ogre::SceneNode * getSceneNode();
+  void destroy();
 
 private:
   Ogre::Vector3 _position;
