@@ -48,6 +48,7 @@ void RankingManager::saveRankings () {
 void RankingManager::loadRankings () {
   std::string line;
   std::ifstream file ("media/ranking.txt");
+  _rankings.clear();
   if (file.is_open()) {
     while (getline(file, line)) {
       _rankings.push_back(line);
