@@ -1,9 +1,7 @@
 #include "RankingManager.h"
 
 std::vector<std::string> RankingManager::getRanking () {
-  if (_rankings.size() == 0) {
-    this->loadRankings();
-  }
+  this->loadRankings();
   return _rankings;
 }
 
