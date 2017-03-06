@@ -54,7 +54,7 @@ void Player::moveBackward(Ogre::Real deltaT)
 
     if ( _pitch < MAX_PITCH)
     {
-      _pitch += TURN_DEGREE  * deltaT;
+      _pitch += TURN_DEGREE * deltaT;
       setOrientation();
     }
   }
@@ -90,17 +90,17 @@ void Player::moveLeft(Ogre::Real deltaT)
   }
 }
 
-void Player::moveToInitialState()
+void Player::moveToInitialState(Ogre::Real deltaT)
 {
   if (_roll != 0)
   {
     if (_roll < 0)
     {
-      _roll += TURN_DEGREE;
+      _roll += TURN_DEGREE * deltaT;
     }
     if (_roll > 0)
     {
-      _roll -= TURN_DEGREE;
+      _roll -= TURN_DEGREE * deltaT;
     }
   }
 
@@ -108,11 +108,11 @@ void Player::moveToInitialState()
   {
     if (_pitch < 0)
     {
-      _pitch += TURN_DEGREE;
+      _pitch += TURN_DEGREE * deltaT;
     }
     if (_pitch > 0)
     {
-      _pitch -= TURN_DEGREE;
+      _pitch -= TURN_DEGREE * deltaT;
     }
   }
   setOrientation();

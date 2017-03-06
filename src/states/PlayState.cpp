@@ -293,7 +293,7 @@ void PlayState::checkPlayerCollitions()
       i--;
       _player.receiveShoot();
 
-      std::cout << "COLLITION DETECTED (player & enemy shoot). " << _player.getLifes() << " lifes remaining\n";
+      // std::cout << "COLLITION DETECTED (player & enemy shoot). " << _player.getLifes() << " lifes remaining\n";
 
       if (_player.getLifes() <= 0)
       {
@@ -317,7 +317,7 @@ void PlayState::checkEnemiesCollitions()
 
         if (collition) // deleting shoot and enemy
         {
-          std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+          // std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
 
           // Delete the destroyed enemy from the scene manager and from the game
           _sceneMgr->destroySceneNode(_enemies[j].getSceneNode());
@@ -372,7 +372,7 @@ void PlayState::movePlayer(Ogre::Real deltaT)
   if (_moveDown)  _player.moveBackward(deltaT);
   if (_moveLeft)  _player.moveLeft(deltaT);
   if (_moveRight) _player.moveRight(deltaT);
-  if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState();
+  if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState(deltaT);
 }
 
 void PlayState::createEnemy()

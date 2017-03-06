@@ -7,7 +7,7 @@
 
 #define MAX_ROLL 45
 #define MAX_PITCH 35
-#define TURN_DEGREE 5
+#define TURN_DEGREE 4
 #define INITIAL_LIFES 3
 
 class Player
@@ -22,7 +22,7 @@ public:
   void moveBackward(Ogre::Real deltaT);
   void moveRight(Ogre::Real deltaT);
   void moveLeft(Ogre::Real deltaT);
-  void moveToInitialState();
+  void moveToInitialState(Ogre::Real deltaT);
   void setOrientation();
   void receiveShoot();
   int getLifes();
