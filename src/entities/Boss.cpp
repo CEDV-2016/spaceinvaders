@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include "SoundFXManager.h"
 
 Boss::Boss() {}
 
@@ -20,6 +21,8 @@ void Boss::create(Ogre::SceneManager* sceneMgr)
   _node->scale(Ogre::Vector3(1.2, 1.2, 1.2));
   _node->setPosition(_position);
   _sceneMgr->getRootSceneNode()->addChild(_node);
+
+  SoundFXManager::getSingletonPtr()->load("mechanic_groan.wav")->play();
 }
 
 bool Boss::updatePosition(Ogre::Real deltaT)
@@ -90,6 +93,8 @@ bool Boss::updatePosition(Ogre::Real deltaT)
 }
 bool Boss::shoot()
 {
+  if ( _state == DYING ) return false;
+
   int min = 0, max = 1000, probability = 3;
 
   int randNum = rand()%(max-min + 1) + min;
@@ -104,6 +109,7 @@ void Boss::receiveShoot()
   if( _lifes <= 0)
   {
     _state = DYING;
+    SoundFXManager::getSingletonPtr()->load("mechanic_sink.wav")->play();
   }
 }
 

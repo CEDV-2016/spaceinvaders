@@ -2,6 +2,7 @@
 #include "NewGameState.h"
 #include "CreditsState.h"
 #include "RankingState.h"
+#include "SoundFXManager.h"
 
 template<> MainState* Ogre::Singleton<MainState>::msSingleton = 0;
 
@@ -20,6 +21,8 @@ void MainState::enter () {
   _sceneManager = _root->getSceneManager("SceneManager");
   _camera = _sceneManager->getCamera("MainCamera");
   _viewport = _root->getAutoCreatedWindow()->getViewport(0);
+
+  SoundFXManager::getSingletonPtr()->load("menu_item.wav")->play();
 
   createGUI();
 

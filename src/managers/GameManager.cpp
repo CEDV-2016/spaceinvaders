@@ -18,7 +18,10 @@ GameManager::~GameManager ()
   }
 
   if (_root)
-    delete _root;
+  delete _root;
+
+  OGRE_DELETE _trackManager;
+  OGRE_DELETE _pSoundFXManager;
 }
 
 void
@@ -27,14 +30,21 @@ GameManager::start
 {
   // Creación del objeto Ogre::Root.
   _root = new Ogre::Root();
+  _trackManager = OGRE_NEW TrackManager;
+  _pSoundFXManager = OGRE_NEW SoundFXManager;
 
   loadResources();
+  initSDL();
+
 
   if (!configure())
-    return;
+  return;
 
   _inputMgr = new InputManager;
   _inputMgr->initialise(_renderWindow);
+
+  _mainTrack = _trackManager->load("star_commander.ogg");
+  _mainTrack->play();
 
   // Registro como key y mouse listener...
   _inputMgr->addKeyListener(this, "GameManager");
@@ -95,7 +105,7 @@ GameManager::pushState
 {
   // Pausa del estado actual.
   if (!_states.empty())
-    _states.top()->pause();
+  _states.top()->pause();
 
   // Transición al nuevo estado.
   _states.push(state);
@@ -114,7 +124,7 @@ GameManager::popState ()
 
   // Vuelta al estado anterior.
   if (!_states.empty())
-    _states.top()->resume();
+  _states.top()->resume();
 }
 
 void
@@ -148,7 +158,7 @@ GameManager::loadResources ()
     for (i = settings->begin(); i != settings->end(); ++i) {
       typestr = i->first;    datastr = i->second;
       Ogre::ResourceGroupManager::getSingleton().addResourceLocation
-            (datastr, typestr, sectionstr);
+      (datastr, typestr, sectionstr);
     }
   }
 }
@@ -236,5 +246,26 @@ GameManager::mouseReleased
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   _states.top()->mouseReleased(e, id);
+  return true;
+}
+
+bool
+GameManager::initSDL () {
+  if (SDL_Init(SDL_INIT_AUDIO) < 0)
+  {
+    return false;
+  }
+  // Llamar a  SDL_Quit al terminar.
+  atexit(SDL_Quit);
+
+  // Inicializando SDL mixer...
+  if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS, 4096) < 0)
+  {
+    return false;
+  }
+
+  // Llamar a Mix_CloseAudio al terminar.
+  atexit(Mix_CloseAudio);
+
   return true;
 }

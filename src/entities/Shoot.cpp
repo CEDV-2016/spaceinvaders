@@ -1,16 +1,23 @@
 #include "Shoot.h"
+#include "SoundFXManager.h"
 
 Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
 {
   _sceneMgr = sceneMgr;
   _shooter = shooter;
-
+  _node = NULL;
+  
   Ogre::Entity * ent_shoot = _sceneMgr->createEntity("Shoot.mesh");
 
-  if (_shooter == ENEMY_SHOOT) {
+  if (_shooter == ENEMY_SHOOT)
+  {
     ent_shoot->setMaterialName("EnemyShoot.material");
   }
 
+  if ( _shooter == PLAYER_SHOOT)
+  {
+    SoundFXManager::getSingletonPtr()->load("shoot.wav")->play();
+  }
   _node = _sceneMgr->createSceneNode();
   _node->attachObject(ent_shoot);
   _node->setPosition(position);

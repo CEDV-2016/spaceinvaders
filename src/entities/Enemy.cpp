@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "SoundFXManager.h"
 
 Enemy::Enemy(Ogre::SceneManager* sceneMgr)
 {
@@ -57,5 +58,6 @@ double Enemy::getRandomXPosition()
 
 void Enemy::destroy()
 {
+  SoundFXManager::getSingletonPtr()->load("explosion.wav")->play();
   _sceneMgr->destroySceneNode( _node );
 }

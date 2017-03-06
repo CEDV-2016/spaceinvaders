@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "SoundFXManager.h"
 
 Player::Player() {}
 
@@ -128,6 +129,7 @@ void Player::setOrientation()
 void Player::receiveShoot()
 {
   _lifes--;
+  SoundFXManager::getSingletonPtr()->load("player_hurt.wav")->play();
 }
 
 int Player::getLifes()

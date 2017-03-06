@@ -1,4 +1,5 @@
 #include "CreditsState.h"
+#include "SoundFXManager.h"
 
 template<> CreditsState* Ogre::Singleton<CreditsState>::msSingleton = 0;
 
@@ -14,6 +15,8 @@ CreditsState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   createGUI();
+
+  SoundFXManager::getSingletonPtr()->load("menu_item.wav")->play();
 
   _exitGame = false;
 }

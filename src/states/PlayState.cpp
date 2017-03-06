@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include "PauseState.h"
 #include "EndState.h"
+#include "SoundFXManager.h"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -423,6 +424,15 @@ void PlayState::createEnemy()
 }
 
 void PlayState::endGame(bool win){
+  if (win)
+  {
+    SoundFXManager::getSingletonPtr()->load("win.wav")->play();
+  }
+  else
+  {
+    SoundFXManager::getSingletonPtr()->load("game_over.wav")->play();
+  }
+
   _phase = ENEMIES;
   EndState* endState = EndState::getSingletonPtr();
   endState->setData(win, _game->getPlayerName(), _game->getPoints());

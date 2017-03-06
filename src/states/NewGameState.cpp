@@ -1,5 +1,6 @@
 #include "NewGameState.h"
 #include "PlayState.h"
+#include "SoundFXManager.h"
 
 template<> NewGameState* Ogre::Singleton<NewGameState>::msSingleton = 0;
 
@@ -16,6 +17,8 @@ NewGameState::enter ()
   _sceneManager = _root->getSceneManager("SceneManager");
   _camera = _sceneManager->getCamera("MainCamera");
   createGUI();
+
+  SoundFXManager::getSingletonPtr()->load("menu_item.wav")->play();
 
   _exitGame = false;
 }

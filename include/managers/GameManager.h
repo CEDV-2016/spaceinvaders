@@ -11,6 +11,10 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "InputManager.h"
+#include "Track.h"
+#include "TrackManager.h"
+#include "SoundFX.h"
+#include "SoundFXManager.h"
 
 class GameState;
 
@@ -37,6 +41,9 @@ class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManag
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneManager;
   Ogre::RenderWindow* _renderWindow;
+  TrackManager* _trackManager;
+  TrackPtr _mainTrack;
+  SoundFXManager* _pSoundFXManager;
 
   // Funciones de configuración.
   void loadResources ();
@@ -45,6 +52,8 @@ class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManag
   // Heredados de FrameListener.
   bool frameStarted (const Ogre::FrameEvent& evt);
   bool frameEnded (const Ogre::FrameEvent& evt);
+
+  bool initSDL();
 
  private:
   // Funciones para delegar eventos de teclado

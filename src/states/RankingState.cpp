@@ -1,6 +1,7 @@
 #include <sstream>
 
 #include "RankingState.h"
+#include "SoundFXManager.h"
 
 template<> RankingState* Ogre::Singleton<RankingState>::msSingleton = 0;
 
@@ -17,6 +18,8 @@ RankingState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   createGUI();
+
+  SoundFXManager::getSingletonPtr()->load("menu_item.wav")->play();
 
   _exitGame = false;
 }
