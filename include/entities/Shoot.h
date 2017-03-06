@@ -15,7 +15,7 @@ public:
   Shoot(int shooter, Ogre::Vector3 coord, Ogre::SceneManager* sceneMgr);
   ~Shoot();
   bool checkCollition(Ogre::SceneNode * node);
-  bool updatePosition();
+  bool updatePosition(Ogre::Real deltaT);
 
 private:
   void destroyShoot();

@@ -2,11 +2,11 @@
 
 #include <Ogre.h>
 
-#define RIGHT 0
-#define LEFT  1
+#define MOVE_RIGHT 0
+#define MOVE_LEFT  1
 #define BOSS_LIFE  20
 #define MAX_ROLL_BOSS 10
-#define TURN_DEGREE_BOSS 0.05
+#define TURN_DEGREE_BOSS 0.5
 
 class Boss
 {
@@ -14,7 +14,7 @@ public:
   Boss();
   ~Boss();
   void create(Ogre::SceneManager* sceneMgr);
-  void updatePosition();
+  void updatePosition(Ogre::Real deltaT);
   void setOrientation();
   bool shoot();
   Ogre::Vector3 getPosition();
