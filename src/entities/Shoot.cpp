@@ -19,7 +19,7 @@ Shoot::Shoot(int shooter, Ogre::Vector3 position, Ogre::SceneManager* sceneMgr)
 
 Shoot::~Shoot() { }
 
-bool Shoot::updatePosition()
+bool Shoot::updatePosition(Ogre::Real deltaT)
 {
   if (_valid && _node)
   {
@@ -32,7 +32,7 @@ bool Shoot::updatePosition()
       }
       else
       {
-        _node->translate(0, 0, -0.04); //move up
+        _node->translate(0, 0, -0.4 * deltaT); //move up
       }
       break;
 
@@ -43,7 +43,7 @@ bool Shoot::updatePosition()
       }
       else
       {
-        _node->translate(0, 0, 0.04); //move down
+        _node->translate(0, 0, 0.4 * deltaT); //move down
       }
       break;
     }

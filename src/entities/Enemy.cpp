@@ -24,7 +24,7 @@ void Enemy::updatePosition(Ogre::Real deltaT)
   }
   else
   {
-    _position += Ogre::Vector3(0, 0, 0.02 * deltaT);
+    _position += Ogre::Vector3(0, 0, 0.25 * deltaT);
   }
   _node->setPosition(_position);
 }

@@ -56,7 +56,7 @@ PlayState::frameStarted
 (const Ogre::FrameEvent& evt)
 {
   Ogre::Real deltaT = evt.timeSinceLastFrame;
-  deltaT *= 350.0;
+  deltaT *= 25.0;
   // Moves the player basing on the pressed keys
   movePlayer(deltaT);
 
@@ -236,7 +236,7 @@ void PlayState::updateEnemies(Ogre::Real deltaT)
 
   if (_phase == BOSS)
   {
-    _boss.updatePosition();
+    _boss.updatePosition(deltaT);
     if (_boss.shoot()) //one shoot per cannon
     {
       position = _boss.getPosition();
@@ -255,7 +255,7 @@ void PlayState::updateShoots(Ogre::Real deltaT)
   bool valid;
   for (std::size_t i = 0; i < _player_shoots.size(); i++)
   {
-    valid = _player_shoots[i].updatePosition();
+    valid = _player_shoots[i].updatePosition(deltaT);
 
     if (!valid) // if it goes out of the screen will be deleted
     {
@@ -266,7 +266,7 @@ void PlayState::updateShoots(Ogre::Real deltaT)
 
   for (std::size_t i = 0; i < _enemy_shoots.size(); i++)
   {
-    valid = _enemy_shoots[i].updatePosition();
+    valid = _enemy_shoots[i].updatePosition(deltaT);
 
     if (!valid)
     {
@@ -332,7 +332,7 @@ void PlayState::checkEnemiesCollitions()
 
         if (collition) // deleting shoot and enemy
         {
-          std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
+          // std::cout << "COLLITION DETECTED (enemy & player shoot)" << "\n";
 
           // Delete the destroyed enemy from the scene manager and from the game
           _sceneMgr->destroySceneNode(_enemies[j].getSceneNode());
@@ -383,11 +383,11 @@ void PlayState::checkEnemiesCollitions()
 
 void PlayState::movePlayer(Ogre::Real deltaT)
 {
-  if (_moveUp)    _player.moveForward();
-  if (_moveDown)  _player.moveBackward();
-  if (_moveLeft)  _player.moveLeft();
-  if (_moveRight) _player.moveRight();
-  if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState();
+  if (_moveUp)    _player.moveForward(deltaT);
+  if (_moveDown)  _player.moveBackward(deltaT);
+  if (_moveLeft)  _player.moveLeft(deltaT);
+  if (_moveRight) _player.moveRight(deltaT);
+  if (!_moveUp && !_moveRight && !_moveLeft && !_moveRight) _player.moveToInitialState(deltaT);
 }
 
 void PlayState::createEnemy()

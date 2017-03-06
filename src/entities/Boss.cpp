@@ -9,7 +9,7 @@ void Boss::create(Ogre::SceneManager* sceneMgr)
   _position = Ogre::Vector3 ( 0, 0, -20 );
   _roll = 0;
   _sceneMgr = sceneMgr;
-  _move_towards = LEFT;
+  _move_towards = MOVE_LEFT;
   _lifes = BOSS_LIFE;
 
   Ogre::Entity * entity = _sceneMgr->createEntity("Boss.mesh");
@@ -21,38 +21,38 @@ void Boss::create(Ogre::SceneManager* sceneMgr)
   _sceneMgr->getRootSceneNode()->addChild(_node);
 }
 
-void Boss::updatePosition()
+void Boss::updatePosition(Ogre::Real deltaT)
 {
   if (_position.z < -6 ) //move to ~ half of the screen
   {
-    _position += Ogre::Vector3(0, 0, 0.015);
+    _position += Ogre::Vector3(0, 0, 0.15 * deltaT);
   }
   else
   {
-    if(_move_towards == LEFT)
+    if(_move_towards == MOVE_LEFT)
     {
       if (_position.x > -10)
       {
-        _position += Ogre::Vector3(-0.015, 0, 0);
+        _position += Ogre::Vector3(-0.15 * deltaT, 0, 0);
 
-        if (_roll < MAX_ROLL_BOSS) _roll += TURN_DEGREE_BOSS;
+        if (_roll < MAX_ROLL_BOSS) _roll += TURN_DEGREE_BOSS * deltaT;
       }
       else // the boss has reached left limit move right
       {
-        _move_towards = RIGHT;
+        _move_towards = MOVE_RIGHT;
       }
     }
-    else if (_move_towards == RIGHT)
+    else if (_move_towards == MOVE_RIGHT)
     {
       if (_position.x < 10)
       {
         _position += Ogre::Vector3(0.01, 0, 0);
 
-        if (_roll > -MAX_ROLL_BOSS) _roll -= TURN_DEGREE_BOSS;
+        if (_roll > -MAX_ROLL_BOSS) _roll -= TURN_DEGREE_BOSS * deltaT;
       }
       else //the boss has reached the right limit of the screen
       {
-        _move_towards = LEFT;
+        _move_towards = MOVE_LEFT;
       }
     }
   }
