@@ -243,16 +243,27 @@ void PlayState::updateEnemies(Ogre::Real deltaT)
 
   if (_phase == BOSS)
   {
-    _boss.updatePosition(deltaT);
-    if (_boss.shoot()) //one shoot per cannon
+    bool continue_playing;
+    continue_playing = _boss.updatePosition(deltaT);
+    
+    if ( !continue_playing )
     {
-      position = _boss.getPosition();
-      position += Ogre::Vector3(2.2, 0, 1.5);
-      addEnemyShoot(position);
+      for (int i = 0; i < 5; i++) _game->destroyEnemy(); //givin more points to player
+      _scoreView->setText("Score: " + std::to_string(_game->getPoints()));
+      endGame(true);
+    }
+    else
+    {
+      if (_boss.shoot()) //one shoot per cannon
+      {
+        position = _boss.getPosition();
+        position += Ogre::Vector3(2.2, 0, 1.5);
+        addEnemyShoot(position);
 
-      position = _boss.getPosition();
-      position -= Ogre::Vector3(2.2, 0, 1.5);
-      addEnemyShoot(position);
+        position = _boss.getPosition();
+        position -= Ogre::Vector3(2.2, 0, 1.5);
+        addEnemyShoot(position);
+      }
     }
   }
 }
@@ -379,13 +390,6 @@ void PlayState::checkEnemiesCollitions(Ogre::Real deltaT)
       if (collition)
       {
         _boss.receiveShoot();
-
-        if (! _boss.isAlive() ) //if the boss is not alive...
-        {
-          for (int i = 0; i < 5; i++) _game->destroyEnemy(); //givin more points to player
-          _scoreView->setText("Score: " + std::to_string(_game->getPoints()));
-          endGame(true);
-        }
       }
     }
   }
