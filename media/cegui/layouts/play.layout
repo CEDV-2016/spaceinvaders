@@ -30,17 +30,18 @@
                 <Property name="AutoRenderingSurface" value="true" />
             </Window>
             <Window type="Vanilla/StaticImage" name="Live1" >
-                <Property name="Area" value="{{0,-128},{0,0},{0,-64},{0,64}}" />
-                <Property name="Image" value="Vanilla-Images/CheckboxMark" />
+                <Property name="Area" value="{{0,-128},{0,0},{0,-78},{0,50}}" />
+                <Property name="Image" value="Heart/Heart" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="ImageColours" value="tl:FFFFF000 tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorizontalAlignment" value="Right" />
             </Window>
             <Window type="Vanilla/StaticImage" name="Live2" >
-                <Property name="Area" value="{{0,-64},{0,0},{0,0},{0,64}}" />
-                <Property name="Image" value="Vanilla-Images/CheckboxMark" />
+                <Property name="Area" value="{{0,-64},{0,0},{0,-14},{0,50}}" />
+                <Property name="Image" value="Heart/Heart" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -48,8 +49,8 @@
                 <Property name="HorizontalAlignment" value="Right" />
             </Window>
             <Window type="Vanilla/StaticImage" name="Live3" >
-                <Property name="Area" value="{{0,0},{0,0},{0,64},{0,64}}" />
-                <Property name="Image" value="Vanilla-Images/CheckboxMark" />
+                <Property name="Area" value="{{0,0},{0,0},{0,50},{0,50}}" />
+                <Property name="Image" value="Heart/Heart" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="BackgroundEnabled" value="false" />

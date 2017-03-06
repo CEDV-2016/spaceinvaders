@@ -45,6 +45,7 @@ public:
 
   void createScene();
   void createGUI();
+  void updateGUI();
 
   void setPlayerName(std::string name);
 

@@ -488,7 +488,291 @@
                 <Image component="RightEdge" name="Vanilla-Images/FrameRight"/>
                 <Image component="BottomEdge" name="Vanilla-Images/FrameBottom"/>
                 <Image component="Background" name="Vanilla-Images/GenericBrush"/>
-                <Colours topLeft="FFFFF000" bottomLeft="FFFFF000" topRight="FFFFF000" bottomRight="FFFFF000"/>
+                <Colours topLeft="B3000000" bottomLeft="1A000000" topRight="B3000000" bottomRight="1A000000"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="withtitle_noframe_client_area">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="Vanilla-Images/FrameTopLeft"/>
+                <Image component="TopRightCorner" name="Vanilla-Images/FrameTopRight"/>
+                <Image component="BottomLeftCorner" name="Vanilla-Images/FrameBottomLeft"/>
+                <Image component="BottomRightCorner" name="Vanilla-Images/FrameBottomRight"/>
+                <Image component="LeftEdge" name="Vanilla-Images/FrameLeft"/>
+                <Image component="TopEdge" name="Vanilla-Images/FrameTop"/>
+                <Image component="RightEdge" name="Vanilla-Images/FrameRight"/>
+                <Image component="BottomEdge" name="Vanilla-Images/FrameBottom"/>
+                <Image component="Background" name="Vanilla-Images/GenericBrush"/>
+                <Colours topLeft="FF333333" bottomLeft="FF333333" topRight="FF333333" bottomRight="FF333333"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="notitle_noframe_client_area">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="Vanilla-Images/FrameTopLeft"/>
+                <Image component="TopRightCorner" name="Vanilla-Images/FrameTopRight"/>
+                <Image component="BottomLeftCorner" name="Vanilla-Images/FrameBottomLeft"/>
+                <Image component="BottomRightCorner" name="Vanilla-Images/FrameBottomRight"/>
+                <Image component="LeftEdge" name="Vanilla-Images/FrameLeft"/>
+                <Image component="TopEdge" name="Vanilla-Images/FrameTop"/>
+                <Image component="RightEdge" name="Vanilla-Images/FrameRight"/>
+                <Image component="BottomEdge" name="Vanilla-Images/FrameBottom"/>
+                <Image component="Background" name="Vanilla-Images/GenericBrush"/>
+                <Colours topLeft="FF333333" bottomLeft="FF333333" topRight="FF333333" bottomRight="FF333333"/>
+            </FrameComponent>
+        </ImagerySection>
+        <StateImagery name="ActiveWithTitleWithFrame">
+            <Layer>
+                <Section section="withtitle_frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveWithTitleWithFrame">
+            <Layer>
+                <Section section="withtitle_frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledWithTitleWithFrame">
+            <Layer>
+                <Section section="withtitle_frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveWithTitleNoFrame">
+            <Layer>
+                <Section section="withtitle_noframe_client_area"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveWithTitleNoFrame">
+            <Layer>
+                <Section section="withtitle_noframe_client_area"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledWithTitleNoFrame">
+            <Layer>
+                <Section section="withtitle_noframe_client_area"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveNoTitleWithFrame">
+            <Layer>
+                <Section section="notitle_frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveNoTitleWithFrame">
+            <Layer>
+                <Section section="notitle_frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledNoTitleWithFrame">
+            <Layer>
+                <Section section="notitle_frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveNoTitleNoFrame">
+            <Layer>
+                <Section section="notitle_noframe_client_area"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveNoTitleNoFrame">
+            <Layer>
+                <Section section="notitle_noframe_client_area"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledNoTitleNoFrame">
+            <Layer>
+                <Section section="notitle_noframe_client_area"/>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+    <WidgetLook name="Vanilla/FrameWindowSpace">
+        <PropertyLinkDefinition targetProperty="CaptionColour" widget="__auto_titlebar__" initialValue="FFFFFFFF" type="ColourRect" name="CaptionColour"/>
+        <PropertyLinkDefinition targetProperty="Font" widget="__auto_titlebar__" type="Font" name="TitlebarFont"/>
+        <Property name="NSSizingCursorImage" value="Vanilla-Images/MouseArrow"/>
+        <Property name="EWSizingCursorImage" value="Vanilla-Images/MouseArrow"/>
+        <Property name="NWSESizingCursorImage" value="Vanilla-Images/MouseArrow"/>
+        <Property name="NESWSizingCursorImage" value="Vanilla-Images/MouseArrow"/>
+        <Property name="RollUpEnabled" value="false"/>
+        <Property name="MinSize" value="{{0.1,0},{0.1,0}}"/>
+        <Property name="AutoRenderingSurface" value="true"/>
+        <Property name="Size" value="{{0.3, 0}, {0.3, 0}}" />
+        <NamedArea name="ClientWithTitleWithFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="7"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge"/>
+                </Dim>
+                <Dim type="RightEdge">
+                    <UnifiedDim scale="1" type="RightEdge" offset="-7"/>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <UnifiedDim scale="1" type="BottomEdge" offset="-7"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <NamedArea name="ClientWithTitleNoFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge"/>
+                </Dim>
+                <Dim type="RightEdge">
+                    <UnifiedDim scale="1" type="RightEdge"/>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <UnifiedDim scale="1" type="BottomEdge"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <NamedArea name="ClientNoTitleWithFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="7"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="7"/>
+                </Dim>
+                <Dim type="RightEdge">
+                    <UnifiedDim scale="1" type="RightEdge" offset="-7"/>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <UnifiedDim scale="1" type="BottomEdge" offset="-7"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <NamedArea name="ClientNoTitleNoFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="Width">
+                    <UnifiedDim scale="1" type="Width"/>
+                </Dim>
+                <Dim type="Height">
+                    <UnifiedDim scale="1" type="Height"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <Child nameSuffix="__auto_titlebar__" type="Vanilla/Titlebar">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="Width">
+                    <UnifiedDim scale="1" type="Width"/>
+                </Dim>
+                <Dim type="Height">
+                    <FontDim padding="14" type="LineSpacing"/>
+                </Dim>
+            </Area>
+            <Property name="AlwaysOnTop" value="false"/>
+        </Child>
+        <Child nameSuffix="__auto_closebutton__" type="Vanilla/Button">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="-7"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="7"/>
+                </Dim>
+                <Dim type="Width">
+                    <AbsoluteDim value="7"/>
+                </Dim>
+                <Dim type="Height">
+                    <AbsoluteDim value="7"/>
+                </Dim>
+            </Area>
+            <HorzAlignment type="RightAligned"/>
+            <Property name="NonClient" value="true"/>
+            <Property name="AlwaysOnTop" value="true"/>
+        </Child>
+        <ImagerySection name="withtitle_frame">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="Vanilla-Images/FrameTopLeft"/>
+                <Image component="TopRightCorner" name="Vanilla-Images/FrameTopRight"/>
+                <Image component="BottomLeftCorner" name="Vanilla-Images/FrameBottomLeft"/>
+                <Image component="BottomRightCorner" name="Vanilla-Images/FrameBottomRight"/>
+                <Image component="LeftEdge" name="Vanilla-Images/FrameLeft"/>
+                <Image component="TopEdge" name="Vanilla-Images/FrameTop"/>
+                <Image component="RightEdge" name="Vanilla-Images/FrameRight"/>
+                <Image component="BottomEdge" name="Vanilla-Images/FrameBottom"/>
+                <Image component="Background" name="Vanilla-Images/GenericBrush"/>
+                <Colours topLeft="FF191970" bottomLeft="FF191970" topRight="FF191970" bottomRight="FF191970"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="notitle_frame">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="Vanilla-Images/FrameTopLeft"/>
+                <Image component="TopRightCorner" name="Vanilla-Images/FrameTopRight"/>
+                <Image component="BottomLeftCorner" name="Vanilla-Images/FrameBottomLeft"/>
+                <Image component="BottomRightCorner" name="Vanilla-Images/FrameBottomRight"/>
+                <Image component="LeftEdge" name="Vanilla-Images/FrameLeft"/>
+                <Image component="TopEdge" name="Vanilla-Images/FrameTop"/>
+                <Image component="RightEdge" name="Vanilla-Images/FrameRight"/>
+                <Image component="BottomEdge" name="Vanilla-Images/FrameBottom"/>
+                <Image component="Background" name="Vanilla-Images/GenericBrush"/>
+                <Colours topLeft="FFFFF000" bottomLeft="00FFFFFF" topRight="FFFFF000" bottomRight="00FFFFFF"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="withtitle_noframe_client_area">

@@ -189,6 +189,20 @@ void PlayState::createGUI()
   }
 }
 
+void PlayState::updateGUI() {
+  switch (_player.getLifes()) {
+    case 2:
+      _life3View->setVisible(false);
+      break;
+    case 1:
+      _life2View->setVisible(false);
+      break;
+    case 0:
+      _life1View->setVisible(false);
+      break;
+  }
+}
+
 void PlayState::setPlayerName(std::string name)
 {
   _game->setPlayerName(name);
@@ -294,6 +308,7 @@ void PlayState::checkPlayerCollitions()
       _player.receiveShoot();
 
       std::cout << "COLLITION DETECTED (player & enemy shoot). " << _player.getLifes() << " lifes remaining\n";
+      updateGUI();
 
       if (_player.getLifes() <= 0)
       {
