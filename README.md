@@ -3,8 +3,8 @@
 GNU/Linux minigame developed in C++ by means of [Ogre 1.9](http://www.ogre3d.org/), [CEGUI](http://cegui.org.uk/) and [CEED](http://cegui.org.uk/wiki/CEED).
 
 ## Authors
-* Pedro Manuel Gómez-Portillo López
-* José Juan Ramírez de Arellano Díaz Miguel
+* [Pedro Manuel Gómez-Portillo López](https://github.com/gomezportillo)
+* [José Juan Ramírez de Arellano Díaz Miguel](https://github.com/jotaramirez90)
 
 ## Screenshots
 
